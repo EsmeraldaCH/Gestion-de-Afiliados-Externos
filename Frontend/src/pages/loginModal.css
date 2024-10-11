@@ -1,0 +1,93 @@
+/* Estilos para el modal */
+.modal-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-content {
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-left {
+    width: 50%;
+  }
+  
+  .modal-logo {
+    width: 100%;
+    height: auto;
+  }
+  
+  .modal-right {
+    width: 50%;
+    padding: 20px;
+  }
+  
+  .input-field {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: #fc800d;
+    padding: 10px 20px;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+  }
+  
+  .btn-google:hover {
+    background-color: white;
+  }
+  
+  .google-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+  
+  .register-btn {
+    width: 100%;
+    padding: 10px;
+    background-color:#fc800d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .login-link,
+  .register-link {
+    margin-top: 10px;
+  }
+  
+  .login-link a,
+  .register-link a {
+    color: #4285f4;
+    text-decoration: none;
+  }
+  
