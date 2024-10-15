@@ -12,7 +12,7 @@ function App() {
           {/* Ruta para la página principal */}
           <Route path="/" element={<HomePage />} />
           {/* Ruta para la página de perfil */}
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/Profile" element={<Profile />} />
         </Routes>
       </Router>
     </ErrorBoundary>

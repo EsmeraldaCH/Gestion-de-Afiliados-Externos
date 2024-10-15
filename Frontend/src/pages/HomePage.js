@@ -26,7 +26,7 @@ const HomePage = () => {
   // Función para redirigir a la autenticación de Google
   const handleGoogleLogin = () => {
     // Redirige a la ruta del backend que inicia la autenticación con Google
-    window.location.href = 'http://localhost:3000/auth/google'; // Ajusta la URL si es necesario
+    window.location.href = 'http://localhost:5000/auth/google';
   };
 
   return (
@@ -179,7 +179,7 @@ const HomePage = () => {
         <div className="home-tutorial">
           <p>¿Cómo crear una cuenta?</p>
           <iframe
-            src="url-del-video"
+            src="/video.mp4"
             className="home-video"
             title="Video tutorial"
           ></iframe>
@@ -211,7 +211,7 @@ const HomePage = () => {
             <img className="icon" src="./instagram.png" alt="Instagram" />
           </a>
           <a
-            href="https://www.tiktok.com/@fundacion-ai-koi"
+            href="https://www.tiktok.com/@aikoiac"
             target="_blank"
             rel="noopener noreferrer"
           >

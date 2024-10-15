@@ -91,3 +91,57 @@
     text-decoration: none;
   }
   
+/* Perfil */
+/* Estilos para el perfil */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f7f7f7; /* Color de fondo suave */
+  padding: 20px;
+}
+
+.profile-info {
+  background-color: #fff; /* Fondo blanco para el contenedor del perfil */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 400px; /* Maximo ancho del contenedor */
+  width: 100%; /* Full width para dispositivos pequeños */
+  text-align: center; /* Centrar texto */
+}
+
+.profile-info h1 {
+  color: #ff7f50; /* Color naranja para el encabezado */
+  margin-bottom: 20px;
+}
+
+.profile-info p {
+  color: #333; /* Color del texto */
+  margin: 10px 0; /* Espaciado entre los párrafos */
+}
+
+.profile-photo {
+  border-radius: 50%; /* Hacer la foto redonda */
+  width: 96px; /* Ancho de la foto */
+  height: 96px; /* Altura de la foto */
+  object-fit: cover; /* Asegurarse de que la imagen cubra el contenedor */
+  margin-top: 15px; /* Margen superior */
+}
+
+@media (max-width: 600px) {
+  .profile-info {
+      padding: 15px;
+  }
+
+  .profile-info h1 {
+      font-size: 1.5rem; /* Tamaño de fuente más pequeño en pantallas pequeñas */
+  }
+}
+
