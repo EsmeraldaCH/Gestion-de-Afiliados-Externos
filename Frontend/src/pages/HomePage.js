@@ -92,13 +92,6 @@ const HomePage = () => {
                       placeholder="Ingresa tu contraseña"
                       className="input-field"
                     />
-                    <button
-                      type="button"
-                      className="toggle-password"
-                      onClick={togglePasswordVisibility}
-                    >
-                      {showPassword ? 'Ocultar' : 'Mostrar'}
-                    </button>
                   </div>
                   {/* Botón para autenticarse con Google */}
                   <button
@@ -133,6 +126,13 @@ const HomePage = () => {
                     placeholder="Ingresa tu correo electrónico"
                     className="input-field"
                   />
+                    <div className="password-container">
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder="Ingresa tu contraseña"
+                      className="input-field"
+                    />
+                  </div>
                   {/* Botón para registrarse con Google */}
                   <button 
                     className="btn-google"
@@ -215,7 +215,7 @@ const HomePage = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img className="icon" src="./tik-tok (1).png" alt="TikTok" />
+            <img className="icon" src="./tik-tok.png" alt="TikTok" />
           </a>
           <a
             href="https://twitter.com/fundacionaikoi"

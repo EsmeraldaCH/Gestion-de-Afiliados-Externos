@@ -1,5 +1,6 @@
 .home-container {
-    font-family: Arial, sans-serif, Kite One;
+    font-family: 'Roboto', sans-serif;
+    background-color: #FFF5E0;
     text-align: center;
     padding: 20px;
     color: #333333;
@@ -12,7 +13,7 @@
     font-family: Kite One;
     text-align: left;
     padding: 0px;
-    color: #fc800d;
+    color: #f26512;
     height: 65px;
 }
 
@@ -59,23 +60,57 @@
     gap: 20px;
     margin: 40px auto;
     height: auto;
+    flex-wrap: wrap; /* Permite que los botones se envuelvan si no hay suficiente espacio */
 }
 
+/* Mantener flex-direction en row incluso en pantallas pequeñas */
+@media (max-width: 1200px) {
+    .home-buttons {
+        flex-direction: row; /* Aseguramos que la dirección sea fila */
+        width: auto; /* El ancho puede ser automático para evitar desbordamientos */
+    }
+}
+
+/* Ajustes en las dimensiones de los botones */
 .btn-login, .btn-register {
-    background-color: #ff9900;
+    background-color: #f26512;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 20px;
     color: white;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
     border-radius: 5px;
-    width: 150px;
-    height: 40px;
+    flex: 1; /* Permite que los botones crezcan igual */
+    min-width: 150px; /* Ancho mínimo para que no se hagan demasiado pequeños */
+    max-width: 200px; /* Ancho máximo para mantener el diseño */
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Animación suave */
 }
 
+/* Hover con animación */
 .btn-login:hover, .btn-register:hover {
-    background-color: #ff7700;
+    background-color: #d8540f;
+    transform: scale(1.05); /* Efecto ligero de agrandamiento */
 }
+
+/* Ajuste responsivo para pantallas pequeñas */
+@media (max-width: 768px) {
+    .btn-login, .btn-register {
+        font-size: 16px;
+        padding: 10px; /* Ajuste del padding para pantallas pequeñas */
+        min-width: 120px; /* Ajustamos el ancho mínimo para que se mantenga la distribución */
+    }
+}
+
+@media (max-width: 480px) {
+    .btn-login, .btn-register {
+        font-size: 14px;
+        padding: 8px; /* Ajuste adicional para dispositivos muy pequeños */
+        min-width: 100px; /* Ajustamos aún más el ancho mínimo para pequeños dispositivos */
+    }
+}
+
+
 
 .home-media {
     display: flex;
@@ -97,7 +132,8 @@
 .home-map, .home-video {
     width: 100%;
     height: auto;
-    border: 5px solid rgb(250, 116, 7);
+    box-shadow: 0 0 0 5px #F26512;
+    
 }
 
 .home-footer {

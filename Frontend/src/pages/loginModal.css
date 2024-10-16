@@ -1,147 +1,154 @@
 /* Estilos para el modal */
 .modal-overlay {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-content {
-    display: flex;
-    background-color: white;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 600px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .modal-left {
-    width: 50%;
-  }
-  
-  .modal-logo {
-    width: 100%;
-    height: auto;
-  }
-  
-  .modal-right {
-    width: 50%;
-    padding: 20px;
-  }
-  
-  .input-field {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .btn-google {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    border: #fc800d;
-    padding: 10px 20px;
-    color: black;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    width: 100%;
-  }
-  
-  .btn-google:hover {
-    background-color: white;
-  }
-  
-  .google-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-  }
-  
-  .register-btn {
-    width: 100%;
-    padding: 10px;
-    background-color:#fc800d;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .login-link,
-  .register-link {
-    margin-top: 10px;
-  }
-  
-  .login-link a,
-  .register-link a {
-    color: #4285f4;
-    text-decoration: none;
-  }
-  
-/* Perfil */
-/* Estilos para el perfil */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscurecido */
 }
 
+.modal-content {
+  display: flex;
+  background-color: #FFF5E0; /* Fondo del modal */
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.modal-left {
+  width: 50%;
+}
+
+.modal-logo {
+  width: 100%;
+  height: auto;
+}
+
+.modal-right {
+  width: 50%;
+  padding: 20px;
+}
+
+/* Estilos para los campos de input */
+.input-field {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #FFEEC8; /* Borde con el color solicitado */
+  border-radius: 5px;
+  background-color: #FFEEC8; /* Fondo suave */
+  font-size: 16px;
+  color: #333;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #F26512; /* Borde naranja al enfocar */
+  box-shadow: 0 0 5px #F26512; /* Efecto brillante */
+}
+
+/* Botón de Google */
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFF5E0;
+  border: 1px solid #F26512; /* Borde naranja */
+  padding: 10px 20px;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.btn-google:hover {
+  background-color: #FFEEC8;
+}
+
+/* Icono de Google */
+.google-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+/* Botón de registro */
+.register-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #F26512; /* Naranja */
+  color: #FFEEC8; /* Texto claro */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.register-btn:hover {
+  background-color: #FF7A45; /* Un tono más claro de naranja */
+}
+
+/* Links */
+.login-link a,
+.register-link a {
+  color: #4285f4;
+  text-decoration: none;
+}
+
+/* Estilos para el perfil */
 .profile-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f7f7f7; /* Color de fondo suave */
+  background-color: #f7f7f7; /* Fondo suave */
   padding: 20px;
 }
 
 .profile-info {
-  background-color: #fff; /* Fondo blanco para el contenedor del perfil */
+  background-color: #FFF; /* Fondo blanco */
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra */
   padding: 20px;
-  max-width: 400px; /* Maximo ancho del contenedor */
-  width: 100%; /* Full width para dispositivos pequeños */
-  text-align: center; /* Centrar texto */
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
 }
 
 .profile-info h1 {
-  color: #ff7f50; /* Color naranja para el encabezado */
+  color: #F26512; /* Naranja */
   margin-bottom: 20px;
 }
 
 .profile-info p {
-  color: #333; /* Color del texto */
-  margin: 10px 0; /* Espaciado entre los párrafos */
+  color: #333;
+  margin: 10px 0;
 }
 
 .profile-photo {
-  border-radius: 50%; /* Hacer la foto redonda */
-  width: 96px; /* Ancho de la foto */
-  height: 96px; /* Altura de la foto */
-  object-fit: cover; /* Asegurarse de que la imagen cubra el contenedor */
-  margin-top: 15px; /* Margen superior */
+  border-radius: 50%; /* Imagen redonda */
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  margin-top: 15px;
 }
 
+/* Media Queries */
 @media (max-width: 600px) {
   .profile-info {
       padding: 15px;
   }
 
   .profile-info h1 {
-      font-size: 1.5rem; /* Tamaño de fuente más pequeño en pantallas pequeñas */
+      font-size: 1.5rem;
   }
 }
-
