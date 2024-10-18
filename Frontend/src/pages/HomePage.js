@@ -162,6 +162,14 @@ const HomePage = () => {
 
       {/* Ubicación y tutorial */}
       <section className="home-media">
+      <div className="home-tutorial">
+          <p>¿Cómo crear una cuenta?</p>
+          <iframe
+            src="/video.mp4"
+            className="home-video"
+            title="Video tutorial"
+          ></iframe>
+        </div>
         <div className="home-location">
           <p>Nuestra Ubicación</p>
           <iframe
@@ -176,14 +184,7 @@ const HomePage = () => {
             title="Ubicación"
           ></iframe>
         </div>
-        <div className="home-tutorial">
-          <p>¿Cómo crear una cuenta?</p>
-          <iframe
-            src="/video.mp4"
-            className="home-video"
-            title="Video tutorial"
-          ></iframe>
-        </div>
+       
       </section>
 
       {/* Redes sociales */}
