@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './loginModal.css';
 
-const Profile = () => {
+function Profile () {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [newProfilePicture, setNewProfilePicture] = useState(null);
