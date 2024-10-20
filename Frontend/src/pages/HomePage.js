@@ -1,54 +1,129 @@
 import React, { useState } from 'react';
 import './HomePage.css';
-import './loginModal.css'; // Importamos los estilos del modal
+import './loginModal.css';
 
 const HomePage = () => {
-  const [showModal, setShowModal] = useState(false); // Estado para mostrar/ocultar modal
-  const [view, setView] = useState('login'); // Estado para alternar entre login y registro
-  const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar contraseña
+  const [showModal, setShowModal] = useState(false);
+  const [view, setView] = useState('login');
+  const [showPassword, setShowPassword] = useState(false);
+  const [correo, setCorreo] = useState('');
+  const [contraseña, setContraseña] = useState('');
+  const [erroresContraseña, setErroresContraseña] = useState([]);
+  const [error, setError] = useState(null);
+  const [mensaje, setMensaje] = useState(''); // Estado para mensajes
 
-  // Función para abrir el modal y elegir la vista (login o register)
   const openModal = (viewType) => {
     setView(viewType);
     setShowModal(true);
   };
 
-  // Función para cerrar el modal
   const closeModal = () => {
     setShowModal(false);
   };
 
-  // Función para alternar la visibilidad de la contraseña
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  // Función para redirigir a la autenticación de Google
   const handleGoogleLogin = () => {
-    // Redirige a la ruta del backend que inicia la autenticación con Google
     window.location.href = 'http://localhost:5000/auth/google';
   };
+ 
 
+  // Función para manejar el inicio de sesión 
+const handleLogin = async () => {
+  if (!correo || !contraseña) {
+    setError('Por favor, completa todos los campos.');
+    return;
+  }
+  try {
+    const response = await fetch('http://localhost:5000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ correo, contraseña }),
+    });
+    
+    const data = await response.json();
+    
+    if (response.ok) {
+      console.log('Inicio de sesión exitoso:', data);
+      setError(null);
+      alert('Inicio de sesión exitoso'); // Alerta de éxito
+      window.location.href = 'https://github.com/EsmeraldaCH'; // Redirigir a Facebook
+    } else {
+      console.error('Error en el inicio de sesión:', data.message);
+      setError(data.message || 'Hubo un problema al iniciar sesión');
+    }
+  } catch (error) {
+    console.error('Error en la solicitud de inicio de sesión:', error);
+    setError('Error en la solicitud de inicio de sesión. Detalles: ' + error.message);
+  }
+};
+
+  const validarContraseña = (contraseña) => {
+    const errores = [];
+    if (contraseña.length < 8) {
+      errores.push('La contraseña debe tener al menos 8 caracteres.');
+    }
+    if (!/[A-Z]/.test(contraseña)) {
+      errores.push('La contraseña debe tener al menos una letra mayúscula.');
+    }
+    if (!/[a-z]/.test(contraseña)) {
+      errores.push('La contraseña debe tener al menos una letra minúscula.');
+    }
+    if (!/\d/.test(contraseña)) {
+      errores.push('La contraseña debe tener al menos un número.');
+    }
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(contraseña)) {
+      errores.push('La contraseña debe tener al menos un carácter especial.');
+    }
+    setErroresContraseña(errores);
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    if (erroresContraseña.length === 0) {
+      try {
+        const response = await fetch('http://localhost:5000/registro', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ correo, contraseña }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          alert('Usuario registrado con éxito');
+          setCorreo('');
+          setContraseña('');
+          closeModal();
+        } else {
+          alert(data.message || 'Hubo un problema al registrar, intenta de nuevo');
+        }
+      } catch (error) {
+        alert('Hubo un problema al registrar, intenta de nuevo');
+      }
+    } else {
+      alert('Por favor, corrige los errores de la contraseña antes de continuar.');
+    }
+  };
+////////////////////////////////////
   return (
     <div className="home-container">
-      {/* Logo y título */}
       <section className="home-header">
-        <img
-          src="./logofundacion.png"
-          alt="Fundación Ai Koi"
-          className="home-logo"
-        />
+        <img src="./logofundacion.png" alt="Fundación Ai Koi" className="home-logo" />
         <header className="home-header">
           <h1>Dar & Recibir</h1>
         </header>
       </section>
 
-      {/* Descripción inicial */}
       <section className="home-title">
         <p>Apoyo y cuidado en cada etapa</p>
       </section>
 
-      {/* Descripción */}
       <section className="home-description">
         <p>
           En la Fundación Ai Koi, ofrecemos asistencia y recursos adaptados a tus
@@ -56,7 +131,6 @@ const HomePage = () => {
         </p>
       </section>
 
-      {/* Botones para iniciar sesión y crear cuenta */}
       <div className="home-buttons">
         <button className="btn-login" onClick={() => openModal('login')}>
           Iniciar Sesión
@@ -65,17 +139,12 @@ const HomePage = () => {
           Crear Cuenta
         </button>
       </div>
-
-      {/* Modal de inicio de sesión y registro */}
+        
       {showModal && (
         <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-left">
-              <img
-                src="./logofundacion.png"
-                alt="Fundación Ai Koi"
-                className="modal-logo"
-              />
+              <img src="./logofundacion.png" alt="Fundación Ai Koi" className="modal-logo" />
             </div>
             <div className="modal-right">
               {view === 'login' ? (
@@ -83,70 +152,73 @@ const HomePage = () => {
                   <h2>Iniciar Sesión</h2>
                   <input
                     type="email"
-                    placeholder="Ingresa tu correo electrónico"
+                    placeholder="Ingrese su Correo electrónico"
                     className="input-field"
+                    value={correo}
+                    onChange={(e) => setCorreo(e.target.value)}
                   />
                   <div className="password-container">
                     <input
                       type={showPassword ? 'text' : 'password'}
-                      placeholder="Ingresa tu contraseña"
+                      placeholder="Ingrese su Contraseña"
                       className="input-field"
+                      value={contraseña}
+                      onChange={(e) => setContraseña(e.target.value)}
                     />
                   </div>
-                  {/* Botón para autenticarse con Google */}
-                  <button
-                    className="btn-google"
-                    onClick={handleGoogleLogin} // Función reutilizada para Google Login
-                  >
-                    <img
-                      src="./google.png"
-                      alt="Google Icon"
-                      className="google-icon"
-                    />
+                  <button className="btn-google" onClick={handleGoogleLogin}>
+                    <img src="./google.png" alt="Google Icon" className="google-icon" />
                     Iniciar sesión con Google
                   </button>
+                  <button className="login-btn" onClick={handleLogin}>
+                    Ingresar
+                  </button>
+                  {error && <p className="error-message">{error}</p>}
 
                   <p className="login-link">
                     ¿No tienes una cuenta?{' '}
                     <a href="#" onClick={() => setView('register')}>
                       Regístrate aquí
                     </a>
+
                   </p>
                 </div>
               ) : (
                 <div>
-                  <h2>Crear Cuenta</h2>
-                  <input
-                    type="text"
-                    placeholder="Ingresa tu Nombre"
-                    className="input-field"
-                  />
+                  <h1>Crear Cuenta</h1>
                   <input
                     type="email"
-                    placeholder="Ingresa tu correo electrónico"
+                    placeholder="Ingrese su Correo Electrónico"
                     className="input-field"
+                    value={correo}
+                    onChange={(e) => setCorreo(e.target.value)}
                   />
-                    <div className="password-container">
+                  <div className="password-container">
                     <input
                       type={showPassword ? 'text' : 'password'}
-                      placeholder="Ingresa tu contraseña"
+                      placeholder="Ingrese su Contraseña"
                       className="input-field"
+                      value={contraseña}
+                      onChange={(e) => {
+                        setContraseña(e.target.value);
+                        validarContraseña(e.target.value);
+                      }}
                     />
                   </div>
-                  {/* Botón para registrarse con Google */}
-                  <button 
-                    className="btn-google"
-                    onClick={handleGoogleLogin} // Mismo flujo de autenticación para el registro
-                  >
-                    <img
-                      src="./google.png" 
-                      alt="Google Icon"
-                      className="google-icon"
-                    />
+                  <ul className="error-list">
+                    {erroresContraseña.map((error, index) => (
+                      <li key={index} className="error-message">
+                        {error}
+                      </li>
+                    ))}
+                  </ul>
+                  <button className="register-btn" onClick={handleRegister}>
+                    Crear cuenta 
+                  </button>
+                  <button className="btn-google" onClick={handleGoogleLogin}>
+                    <img src="./google.png" alt="Google Icon" className="google-icon" />
                     Registrarse con Google
                   </button>
-
-                  <button className="register-btn">Siguiente</button>
                   <p className="register-link">
                     ¿Ya tienes una cuenta?{' '}
                     <a href="#" onClick={() => setView('login')}>
@@ -160,9 +232,8 @@ const HomePage = () => {
         </div>
       )}
 
-      {/* Ubicación y tutorial */}
       <section className="home-media">
-      <div className="home-tutorial">
+        <div className="home-tutorial">
           <p>¿Cómo crear una cuenta?</p>
           <iframe
             src="/video.mp4"
@@ -184,11 +255,9 @@ const HomePage = () => {
             title="Ubicación"
           ></iframe>
         </div>
-       
       </section>
-
-      {/* Redes sociales */}
-      <footer className="home-footer">
+ {/* Redes sociales */}
+ <footer className="home-footer">
         <div className="social-icons">
         <a
             href="https://www.facebook.com/profile.php?id=100070034597140&mibextid=LQQJ4d"
