@@ -1,0 +1,223 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff5e0;
+}
+
+header {
+    background-color: #ffeec8;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Sección de eventos */
+.event-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+}
+
+.left-side, .right-side {
+    text-align: center;
+}
+
+.left-side {
+    width: 50%;
+}
+
+.right-side {
+    width: 40%;
+}
+
+.user-icon img, .right-side img {
+    width: 80px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    padding: 10px;
+    border-radius: 20px 0 0 20px;
+    border: 1px solid #ccc;
+    width: 200px;
+}
+
+.search-bar button {
+    padding: 10px;
+    border-radius: 0 20px 20px 0;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.event-buttons .event-btn {
+    display: block;
+    width: 80%;
+    padding: 15px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 25px;
+    background-color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.event-btn:hover {
+    background-color: #ff6600;
+    color: white;
+}
+
+.upload-btn {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #ff6600;
+    border: none;
+    color: white;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.upload-btn:hover {
+    background-color: #e65c00;
+}
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #ffeec8;
+    margin-top: 50px;
+}
+
+footer a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+.social-media {
+    margin-bottom: 10px;
+}
+
+.social-media a {
+    margin: 0 10px;
+}
+
+/* Media Queries*/
+@media (max-width: 1024px) {
+    .event-section {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .left-side, .right-side {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .event-btn, .upload-btn {
+        width: 90%;
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+}
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .event-section {
+        padding: 20px;
+    }
+
+    .left-side, .right-side {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .event-btn, .upload-btn {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .search-bar input {
+        width: 100%;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+}
+@media (max-width: 480px) {
+    nav ul li a {
+        font-size: 14px;
+    }
+
+    .event-section {
+        padding: 15px;
+    }
+
+    .event-btn, .upload-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    .search-bar input {
+        width: 100%;
+        font-size: 14px;
+    }
+}
+@media (max-width: 360px) {
+    h2 {
+        font-size: 16px;
+    }
+
+    .event-btn, .upload-btn {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .user-icon img, .right-side img {
+        width: 60px;
+    }
+}

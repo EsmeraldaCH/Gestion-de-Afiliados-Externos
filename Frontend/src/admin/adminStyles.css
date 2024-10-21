@@ -1,0 +1,178 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff5e0;
+    color: #010101;
+    
+}
+
+header {
+    background-color: #ffeec8;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Sección de bienvenida y barra de búsqueda */
+.welcome-section {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.admin-icon {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input {
+    padding: 8px;
+    border-radius: 20px 0 0 20px;
+    border: 1px solid #ccc;
+    width: 200px;
+}
+
+.search-bar button {
+    padding: 8px;
+    border-radius: 0 20px 20px 0;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.admin-welcome {
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Panel de administración */
+.admin-panel {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        justify-items: center; 
+        justify-content: center;
+        padding: 40px 0;
+        max-width: 600px;
+        margin: 0 auto; 
+    }
+
+/* Botones estilo panel-item */
+.panel-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #ff6600;
+    color: white;
+    border-radius: 10px;
+    width: 280px;
+    height: 150px;
+    text-decoration: none;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.panel-item img {
+    width: 60px;
+    margin-bottom: 10px;
+}
+
+.panel-item p {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.panel-item:hover {
+    transform: scale(1.1);
+    background-color: #e65c00;
+}
+footer {
+    margin-top: auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #ffeec8;
+    color: rgb(15, 14, 14);
+}
+
+footer a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+/* Media Queries*/
+@media screen and (max-width: 768px) {
+    .welcome-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .admin-panel {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .panel-item {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .search-bar input {
+        width: 150px;
+    }
+
+    .admin-panel {
+        gap: 20px;
+    }
+
+    .panel-item {
+        width: 90%;
+        max-width: 250px;
+    }
+
+    footer {
+        padding: 15px;
+    }
+
+    footer p {
+        font-size: 12px;
+    }
+}

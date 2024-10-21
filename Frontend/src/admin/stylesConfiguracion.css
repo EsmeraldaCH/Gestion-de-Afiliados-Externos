@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff5e0;
+}
+
+header {
+    background-color: #ffeec8;
+    padding: 15px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Sección de configuración */
+.config-section {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.config-section h1 {
+    text-align: center;
+    color: #ff6600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.save-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.save-btn:hover {
+    background-color: #e65c00;
+}
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column; 
+        gap: 15px;
+    }
+
+    .config-section {
+        padding: 15px;
+        margin: 20px;
+    }
+
+    .save-btn {
+        font-size: 14px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .config-section {
+        margin: 10px; 
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        padding: 8px; 
+    }
+
+    .save-btn {
+        padding: 10px;
+    }
+}
