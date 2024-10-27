@@ -1,4 +1,9 @@
 .body-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -14,7 +19,7 @@
     background-color: #ffeec8;
     padding: 15px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    width: 100%;
 }
 
 .admin-nav-list {
@@ -31,63 +36,60 @@
     font-size: 16px;
 }
 
-/* Sección de bienvenida y barra de búsqueda */
 .welcome-section {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
     padding: 20px;
 }
 
 .user-info {
     display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
-.admin-icon {
-    width: 50px;
-    margin-right: 10px;
-}
-
-.search-bar {
-    display: flex;
-    align-items: center;
-}
-
-.search-input {
-    padding: 8px;
-    border-radius: 20px 0 0 20px;
-    border: 1px solid #ccc;
+.profile-photo {
     width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
-.search-button {
-    padding: 8px;
-    border-radius: 0 20px 20px 0;
-    border: 1px solid #ccc;
-    background-color: #fff;
+.file-input {
+    margin-top: 10px;
 }
 
-.admin-welcome {
-    font-size: 18px;
-    text-align: center;
-    font-weight: bold;
+.upload-button {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
-/* Panel de administración */
 .admin-panel {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    justify-items: center; 
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 40px 0;
-    max-width: 600px;
-    margin: 0 auto; 
 }
 
-/* Botones estilo panel-item */
+.admin-panel-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.panel-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Espacio entre los elementos */
+}
+
 .panel-item {
     display: flex;
     flex-direction: column;
@@ -103,27 +105,23 @@
     transition: transform 0.3s, background-color 0.3s;
 }
 
-.panel-item-image {
-    width: 60px;
-    margin-bottom: 10px;
-}
-
 .panel-item-text {
     font-size: 18px;
     font-weight: bold;
 }
 
 .panel-item:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     background-color: #e65c00;
 }
 
 .home-footer {
     margin-top: auto;
-    text-align: center;
+    text-align: left;
     padding: 20px;
     background-color: #ffeec8;
     color: rgb(15, 14, 14);
+    width: 100%;
 }
 
 .social-media {
@@ -143,14 +141,11 @@
 /* Media Queries */
 @media screen and (max-width: 768px) {
     .welcome-section {
-        flex-direction: column;
-        align-items: center;
         text-align: center;
     }
 
     .admin-panel {
-        grid-template-columns: 1fr;
-        padding: 20px;
+        gap: 20px;
     }
 
     .panel-item {
@@ -163,19 +158,6 @@
     .admin-nav-list {
         flex-direction: column;
         gap: 10px;
-    }
-
-    .search-input {
-        width: 150px;
-    }
-
-    .admin-panel {
-        gap: 20px;
-    }
-
-    .panel-item {
-        width: 90%;
-        max-width: 250px;
     }
 
     .home-footer {

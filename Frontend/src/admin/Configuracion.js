@@ -3,10 +3,10 @@ import './stylesConfiguracion.css';
 
 const UserConfig = () => {
   return (
-    <div>
-      <header>
+    <div className="user-config-container">
+      <header className="user-config-header">
         <nav>
-          <ul>
+          <ul className="user-config-nav">
             <li><a href="index.html"><u>Inicio</u></a></li>
             <li><a href="sobre-nosotros.html"><u>Sobre Nosotros</u></a></li>
             <li><a href="servicios.html"><u>Servicios</u></a></li>
@@ -15,7 +15,7 @@ const UserConfig = () => {
         </nav>
       </header>
 
-      <section className="config-section">
+      <section className="config-section body-configuracion">
         <h1>Configuración de Usuario</h1>
         <form id="userConfigForm" action="/updateUser" method="POST">
           <div className="form-group">

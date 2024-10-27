@@ -301,7 +301,7 @@ const handleLogin = async () => {
             <img className="icon" src="./whatsapp.png" alt="WhatsApp" />
           </a>
         </div>
-        <p>Fundación Ai Koi - Términos y Condiciones - Aviso de Privacidad</p>
+        Fundación Ai Koi - <a href="./privacidad">Aviso de Privacidad</a> - <a href="./terminos">Términos y Condiciones</a> 
       </footer>
     </div>
   );

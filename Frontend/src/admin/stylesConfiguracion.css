@@ -1,21 +1,18 @@
-* {
+.body-configuracion {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-body {
     font-family: Arial, sans-serif;
     background-color: #fff5e0;
 }
 
-header {
+.user-config-header {
     background-color: #ffeec8;
     padding: 15px 0;
     text-align: center;
 }
 
-nav ul {
+.user-config-nav {
     list-style-type: none;
     display: flex;
     justify-content: center;
@@ -23,7 +20,7 @@ nav ul {
     flex-wrap: wrap;
 }
 
-nav ul li a {
+.user-config-nav li a {
     text-decoration: none;
     color: #333;
     font-weight: bold;
@@ -78,9 +75,10 @@ input[type="password"] {
 .save-btn:hover {
     background-color: #e65c00;
 }
+
 /* Media Queries para Responsividad */
 @media (max-width: 768px) {
-    nav ul {
+    .user-config-nav {
         flex-direction: column; 
         gap: 15px;
     }

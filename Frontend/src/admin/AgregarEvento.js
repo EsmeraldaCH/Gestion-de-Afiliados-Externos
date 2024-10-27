@@ -3,8 +3,8 @@ import './stylesEvento.css';
 
 function AgregarEvento() {
   return (
-    <div>
-      <header>
+    <div className="evento-container">
+      <header className='header-evento'>
         <nav>
           <ul>
             <li><a href="#"><u>Inicio</u></a></li>
@@ -15,7 +15,7 @@ function AgregarEvento() {
         </nav>
       </header>
 
-      <section className="event-section">
+      <section className="event-section body-evento">
         <div className="left-side">
           <div className="user-icon">
             <img src="../ADMING.png" alt="Icono de Usuario" />

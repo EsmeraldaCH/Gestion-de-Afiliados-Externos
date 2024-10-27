@@ -1,3 +1,4 @@
+// src/components/Usuarios.js
 import React from 'react';
 import './stylesUsuarios.css';
 
@@ -24,30 +25,14 @@ function Usuarios() {
   };
 
   return (
-    <div>
-      <header>
+    <div className="usuarios-container">
+      <header className="header-usuarios">
         <nav>
-          <ul>
-            <li>
-              <a href="index.html">
-                <u>Inicio</u>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <u>Sobre Nosotros</u>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <u>Servicios</u>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <u>Contacto</u>
-              </a>
-            </li>
+          <ul className="usuarios-nav">
+            <li><a href="index.html"><u>Inicio</u></a></li>
+            <li><a href="#"><u>Sobre Nosotros</u></a></li>
+            <li><a href="#"><u>Servicios</u></a></li>
+            <li><a href="#"><u>Contacto</u></a></li>
           </ul>
         </nav>
       </header>
@@ -62,7 +47,6 @@ function Usuarios() {
             </button>
           </div>
         </div>
-        <br />
         <div className="admin-welcome">
           <p>Bienvenido: xx-xx! (ADMIN)</p>
         </div>
@@ -98,18 +82,8 @@ function Usuarios() {
                 <td>Pérez</td>
                 <td>López</td>
                 <td>
-                  <button
-                    className="modify-btn"
-                    onClick={() => modificarUsuario(1)}
-                  >
-                    Modificar
-                  </button>
-                  <button
-                    className="delete-btn"
-                    onClick={() => eliminarUsuario(1)}
-                  >
-                    Eliminar
-                  </button>
+                  <button className="modify-btn button-usuario" onClick={() => modificarUsuario(1)}>Modificar</button>
+                  <button className="delete-btn button-usuario" onClick={() => eliminarUsuario(1)}>Eliminar</button>
                 </td>
               </tr>
             </tbody>
@@ -117,36 +91,34 @@ function Usuarios() {
         </div>
       </section>
 
-      <footer>
+      <footer className="usuarios-footer">
       <div className="social-media">
           <a href="https://www.facebook.com/Ai.Koi.oficial/" target="_blank" rel="noreferrer">
-            <img src="../facebook.png" alt="Facebook" height="30px" />
+            <img src="../facebook.png" alt="Facebook" className="social-icon" height="30px" />
           </a>
           <a href="https://www.tiktok.com/@aikoiac" target="_blank" rel="noreferrer">
-            <img src="../tik-tok.png" alt="Tik-Tok" height="30px" />
+            <img src="../tik-tok.png" alt="Tik-Tok" className="social-icon" height="30px" />
           </a>
           <a href="https://twitter.com/FundacionAiKoi/status/1552848047675154432" target="_blank" rel="noreferrer">
-            <img src="../twiter.png" alt="Twitter" height="30px" />
+            <img src="../twiter.png" alt="Twitter" className="social-icon" height="30px" />
           </a>
           <a href="https://www.instagram.com/fundacionaikoi/" target="_blank" rel="noreferrer">
-            <img src="../instagram.png" alt="Instagram" height="30px" />
+            <img src="../instagram.png" alt="Instagram" className="social-icon" height="30px" />
           </a>
           <a href="https://wa.me/525610152625" target="_blank">
             <img className="icon" src="../whatsapp.png" alt="WhatsApp" height="30px" />
           </a>
-          <a href="mailto:fundacion.aikoi@gmail.com"><img src="../Gmail.png" alt="Gmail" height="30px" /></a>
+          <a href="mailto:fundacion.aikoi@gmail.com"><img src="../Gmail.png" alt="Gmail" className="social-icon" height="30px" /></a>
           <a href="https://www.youtube.com/channel/UCDAO6QlG-OtKvWcZgra1rtQ" target="_blank" rel="noreferrer">
-            <img src="../youtube.png" alt="YouTube" height="30px" />
+            <img src="../youtube.png" alt="YouTube" className="social-icon" height="30px" />
           </a>
-          <a href="#"><img src="../Linkedin.png" alt="Linkedin" height="30px" /></a>
+          <a href="#" className="social-icon"><img src="../Linkedin.png" alt="Linkedin" height="30px" /></a>
         </div>
-        <p>
-          Fundación Ai Koi · <a href="#">Términos y Condiciones</a> ·{' '}
-          <a href="#">Aviso de Privacidad</a>
-        </p>
+        <p className="footer-text">Fundación Ai Koi · <a href="#">Términos y Condiciones</a> · <a href="#">Aviso de Privacidad</a></p>
       </footer>
-    </div>
+      </div>
   );
 }
 
+  
 export default Usuarios;
