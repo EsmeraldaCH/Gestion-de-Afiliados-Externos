@@ -177,7 +177,7 @@ const handleLogin = async () => {
 
                   <p className="login-link">
                     ¿No tienes una cuenta?{' '}
-                    <a href="#" onClick={() => setView('register')}>
+                    <a onClick={() => setView('register')}>
                       Regístrate aquí
                     </a>
 
@@ -221,7 +221,7 @@ const handleLogin = async () => {
                   </button>
                   <p className="register-link">
                     ¿Ya tienes una cuenta?{' '}
-                    <a href="#" onClick={() => setView('login')}>
+                    <a onClick={() => setView('login')}>
                       Inicia sesión aquí
                     </a>
                   </p>

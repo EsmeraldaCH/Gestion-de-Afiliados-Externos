@@ -8,6 +8,9 @@ function UserProfile() {
     const [newProfilePicture, setNewProfilePicture] = useState(null);
     const navigate = useNavigate();
 
+    // URL for the foundation's image
+    const foundationImage = 'path/to/foundation/image.jpg'; // Update this path
+
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -87,18 +90,10 @@ function UserProfile() {
 
             <section className="welcome-section">
                 <div className="user-info">
+                    <img src="./logofundacion.png" alt="Imagen de la Fundación" className="profile-photo" />  
                     <h1>¡Bienvenido, {user.displayName}!</h1>
                     <p><strong>Email:</strong> {user.email}</p>
-                    <img src={user.photo} alt="Foto de perfil" className="profile-photo" />
-
-                    <input 
-                        type="file" 
-                        accept="image/*" 
-                        onChange={handleFileChange} 
-                        capture="environment" 
-                        className="file-input" 
-                    />
-                    <button onClick={handleUpload} className="upload-button">Actualizar foto de perfil</button>
+                 
                 </div>
             </section>
 
@@ -116,26 +111,7 @@ function UserProfile() {
 
             <footer className="home-footer">
                 <div className="social-media">
-                    <a href="https://www.facebook.com/Ai.Koi.oficial/" target="_blank" rel="noreferrer">
-                        <img src="../facebook.png" alt="Facebook" className="social-icon" />
-                    </a>
-                    <a href="https://www.tiktok.com/@aikoiac" target="_blank" rel="noreferrer">
-                        <img src="../tik-tok.png" alt="Tik-Tok" className="social-icon" />
-                    </a>
-                    <a href="https://twitter.com/FundacionAiKoi/status/1552848047675154432" target="_blank" rel="noreferrer">
-                        <img src="../twiter.png" alt="Twitter" className="social-icon" />
-                    </a>
-                    <a href="https://www.instagram.com/fundacionaikoi/" target="_blank" rel="noreferrer">
-                        <img src="../instagram.png" alt="Instagram" className="social-icon" />
-                    </a>
-                    <a href="https://wa.me/525610152625" target="_blank">
-                        <img className="icon" src="../whatsapp.png" alt="WhatsApp" />
-                    </a>
-                    <a href="mailto:fundacion.aikoi@gmail.com"><img src="../Gmail.png" alt="Gmail" className="social-icon" /></a>
-                    <a href="https://www.youtube.com/channel/UCDAO6QlG-OtKvWcZgra1rtQ" target="_blank" rel="noreferrer">
-                        <img src="../youtube.png" alt="YouTube" className="social-icon" />
-                    </a>
-                    <a href="#" className="social-icon"><img src="../Linkedin.png" alt="Linkedin" /></a>
+                    {/* Add social media icons here */}
                 </div>
                 <p className="footer-text">Fundación Ai Koi · <a href="#">Términos y Condiciones</a> · <a href="#">Aviso de Privacidad</a></p>
             </footer>

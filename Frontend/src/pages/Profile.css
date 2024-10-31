@@ -7,6 +7,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    display: flex; /* Permite que los hijos se alineen */
+    flex-direction: column; /* Organiza el contenido en columna */
+    min-height: 100vh; /* Ocupa al menos la altura de la ventana gráfica */
 }
 
 .body-admin {
@@ -50,11 +53,14 @@
 }
 
 .profile-photo {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
+    width: 200px;             /* Ancho del cuadrado */
+    height: 200px;            /* Alto del cuadrado */
+    border-radius: 15px;      /* Bordes redondeados */
+    object-fit: cover;        /* Mantiene el recorte para llenar el cuadrado */
+    object-position: center;   /* Centra la imagen dentro del cuadrado */
+    border: 5px solid #ff6600; /* Opcional: agregar un borde */
 }
+
 
 .file-input {
     margin-top: 10px;
