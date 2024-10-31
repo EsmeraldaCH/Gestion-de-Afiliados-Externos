@@ -1,0 +1,182 @@
+body {
+  background-color: #FFF5E0;
+}
+
+.registro-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.fundacion-logo {
+  width: 100px;
+}
+
+.slogan {
+  font-size: 25px;
+  font-family: Kite One;
+  color: #f26512;
+  height: 65px;
+}
+
+.progress-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.progress-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  background-color: #FFF5E0; /* Color de fondo de los círculos */
+  color: black;
+}
+
+.progress-circle.completed {
+  background-color: #f26512; /* Color de los círculos completados */
+  color: white;
+}
+
+.progress-circle.active {
+  border-color: #f26512; /* Color de borde para el círculo activo */
+}
+
+.form-section {
+  margin-bottom: 20px;
+  flex: 1; 
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #FFEEC8;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  background-color: #f26512;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #d04d10;
+}
+
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1px; /* Espacio entre el input y la sección de no aplica */
+}
+
+.contact-item input[type="text"] {
+  flex: 5; /* El input ocupará 4 partes del espacio */
+}
+
+.contact-item label {
+  display: flex;
+  align-items: center;
+  gap: 1px; /* Espacio entre la casilla y el texto */
+  white-space: nowrap; /* Evita el salto de línea en el texto */
+
+}
+
+  
+ 
+
+.servicios-vivienda-container,
+.servicios-comunitarios-container,
+.antecedentes-container,
+.servicios-salud-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 10px;
+}
+
+
+.servicio-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.servicio-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #F26512; /* Color naranja de la marca */
+  cursor: pointer;
+}
+
+.servicio-item:hover {
+  background-color: #FFEEC8; /* Color de fondo más claro al pasar el mouse */
+  border-radius: 5px;
+}
+
+.servicio-item input[type="checkbox"]:checked + label {
+  color: #F26512; /* Cambia el color del texto cuando el checkbox está seleccionado */
+}
+
+.file-upload-container {
+  margin-top: 20px;
+}
+
+.file-upload-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.file-upload-container input[type="file"] {
+  margin-top: 5px;
+}
+
+.descripcion-textarea {
+  width: 100%;
+  height: 100px;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #F26512; /* Ajusta el color según tus necesidades */
+  border-radius: 4px;
+  resize: none; /* Evita que se pueda cambiar el tamaño */
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between; /* Distribuye los botones uno a la izquierda y otro a la derecha */
+  margin-top: 20px;
+}
+
+.button-group button {
+  flex: 1; /* Permite que ambos botones ocupen el mismo espacio */
+  margin: 0 10px; /* Agrega margen horizontal para separarlos */
+}
