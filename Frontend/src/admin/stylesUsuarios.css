@@ -1,0 +1,127 @@
+/* General */
+.usuarios-container {
+  font-family: Arial, sans-serif;
+  background-color: #fff5e0;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.header-usuarios {
+  background-color: #ffeec8;
+  padding: 15px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.usuarios-nav {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.usuarios-nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Welcome Section */
+.welcome-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.admin-icon {
+  width: 40px;
+  margin-right: 10px;
+}
+
+/* Panel de Usuarios */
+.usuarios-panel {
+  max-width: 1200px;
+  margin: 40px auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tabla-usuarios table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-usuarios th, .tabla-usuarios td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.tabla-usuarios th {
+  background-color: #ff6600;
+  color: white;
+}
+
+/* Botones */
+.button-usuario {
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.modify-btn {
+  background-color: #4CAF50;
+}
+
+.delete-btn {
+  background-color: #f44336;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+.search-btn:hover {
+  background-color: #e65c00;
+}
+
+/* Footer */
+.usuarios-footer {
+  margin-top: auto;
+  background-color: #ffeec8;
+  text-align: center;
+  padding: 20px;
+}
+
+.social-media a {
+  margin: 0 5px;
+}
+
+footer a {
+  color: black;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .usuarios-nav {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .usuarios-panel {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tabla-usuarios th, .tabla-usuarios td {
+    font-size: 14px;
+  }
+}

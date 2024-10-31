@@ -281,7 +281,7 @@ const handleLogin = async () => {
 
                   <p className="login-link">
                     ¿No tienes una cuenta?{' '}
-                    <a href="#" onClick={() => setView('register')}>
+                    <a onClick={() => setView('register')}>
                       Regístrate aquí
                     </a>
 
@@ -325,7 +325,7 @@ const handleLogin = async () => {
                   </button>
                   <p className="register-link">
                     ¿Ya tienes una cuenta?{' '}
-                    <a href="#" onClick={() => setView('login')}>
+                    <a onClick={() => setView('login')}>
                       Inicia sesión aquí
                     </a>
                   </p>
@@ -406,7 +406,7 @@ const handleLogin = async () => {
             <img className="icon" src="./whatsapp.png" alt="WhatsApp" />
           </a>
         </div>
-        <p>Fundación Ai Koi - Términos y Condiciones - Aviso de Privacidad</p>
+        Fundación Ai Koi - <a href="./privacidad">Aviso de Privacidad</a> - <a href="./terminos">Términos y Condiciones</a> 
       </footer>
     </div>
   );

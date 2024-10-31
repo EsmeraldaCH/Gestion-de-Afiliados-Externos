@@ -1,0 +1,115 @@
+/* General */
+body{
+    margin: 0; /* Elimina márgenes por defecto */
+    height: 100%; /* Asegura que el body ocupe toda la altura */
+}
+
+.security-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Espaciado entre header, contenido y footer */
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+    background-color: #fff5e0; /* Color de fondo */
+}
+
+/* Estilo del encabezado */
+.header-usuarios {
+    background-color: #ffeec8; /* Color del header */
+    padding: 15px 0; /* Espaciado interno */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo del título */
+.h2 {
+    color: #333; /* Color del encabezado */
+    margin: 20px 0; /* Espacio arriba y abajo del encabezado */
+    text-align: center; /* Centra el texto del encabezado */
+}
+
+/* Estilo del formulario */
+.change-password-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los inputs y el botón */
+    width: 100%; /* Ocupa todo el ancho */
+}
+
+/* Estilo de los inputs */
+.password-input {
+    margin-bottom: 15px; /* Espacio entre los campos */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    max-width: 400px; /* Ancho máximo para los inputs */
+}
+
+/* Estilo del botón */
+.submit-button {
+    background-color: #ff6600; /* Color del botón */
+    color: white; /* Color del texto del botón */
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    max-width: 400px; /* Ancho máximo para el botón */
+}
+
+.submit-button:hover {
+    background-color: #e65c00; /* Color del botón al pasar el mouse */
+}
+
+/* Estilo de los mensajes de error y éxito */
+.error-message, .success-message {
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center; /* Centra los mensajes */
+}
+
+.error-message {
+    color: red; /* Color para mensajes de error */
+}
+
+.success-message {
+    color: green; /* Color para mensajes de éxito */
+}
+
+/* Estilo del footer */
+.usuarios-footer {
+    background-color: #ffeec8; /* Color del footer */
+    text-align: center; /* Centra el texto */
+    padding: 20px; /* Espaciado interno */
+}
+
+/* Media Queries para hacer el diseño responsivo */
+@media (max-width: 768px) {
+    .security-container {
+        padding: 20px; /* Menos padding en pantallas más pequeñas */
+    }
+
+    .password-input {
+        font-size: 14px; /* Tamaño de fuente más pequeño */
+    }
+
+    .submit-button {
+        font-size: 14px; /* Tamaño de fuente más pequeño en el botón */
+    }
+}
+
+@media (max-width: 480px) {
+    .security-container {
+        padding: 15px; /* Aún menos padding */
+    }
+
+    .password-input {
+        font-size: 12px; /* Tamaño de fuente aún más pequeño */
+    }
+
+    .submit-button {
+        font-size: 12px; /* Tamaño de fuente aún más pequeño en el botón */
+    }
+}
