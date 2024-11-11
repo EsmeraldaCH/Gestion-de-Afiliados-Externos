@@ -15,12 +15,17 @@ function AdminAiKoi() {
     <div className="body-container admin-container body-admin">
       <header className="admin-header">
         <nav className="admin-nav">
+          
           <ul className="admin-nav-list">
+          <div className="header">
+        <img src="../logo.png" alt="Fundación" className="fundacion-logo" />
+      </div>
             <li className="admin-nav-item"><a href="#"><u>Inicio</u></a></li>
             <li className="admin-nav-item"><a href="#"><u>Sobre Nosotros</u></a></li>
             <li className="admin-nav-item"><a href="#"><u>Servicios</u></a></li>
             <li className="admin-nav-item"><a href="#"><u>Contacto</u></a></li>
           </ul>
+        
         </nav>
       </header>
 
@@ -72,14 +77,12 @@ function AdminAiKoi() {
           <a href="https://www.instagram.com/fundacionaikoi/" target="_blank" rel="noreferrer">
             <img src="../instagram.png" alt="Instagram" className="social-icon" height="30px" />
           </a>
-          <a href="https://wa.me/525610152625" target="_blank">
-            <img className="icon" src="../whatsapp.png" alt="WhatsApp" height="30px" />
-          </a>
+         
           <a href="mailto:fundacion.aikoi@gmail.com"><img src="../Gmail.png" alt="Gmail" className="social-icon" height="30px" /></a>
           <a href="https://www.youtube.com/channel/UCDAO6QlG-OtKvWcZgra1rtQ" target="_blank" rel="noreferrer">
             <img src="../youtube.png" alt="YouTube" className="social-icon" height="30px" />
           </a>
-          <a href="#" className="social-icon"><img src="../Linkedin.png" alt="Linkedin" height="30px" /></a>
+         
         </div>
         <p className="footer-text">Fundación Ai Koi · <a href="#">Términos y Condiciones</a> · <a href="#">Aviso de Privacidad</a></p>
       </footer>

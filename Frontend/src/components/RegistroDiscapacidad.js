@@ -271,7 +271,7 @@ const RegistroDiscapacidad = () => {
     <form onSubmit={handleSubmit}>
       <div className="registro-container">
         <div className="header">
-          <img src="./logofundacion.png" alt="Fundación" className="fundacion-logo" />
+          <img src="./logo.png" alt="Fundación" className="fundacion-logo" />
           <h1>Registro para Discapacidad</h1>
           <p className="slogan">Dar & Recibir</p>
         </div>

@@ -3,11 +3,11 @@ body {
 }
 
 .registro-container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 20px;
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -19,7 +19,7 @@ body {
 }
 
 .fundacion-logo {
-  width: 100px;
+  width: 150px;
 }
 
 .slogan {
@@ -36,8 +36,8 @@ body {
 }
 
 .progress-circle {
-  width: 30px;
-  height: 30px;
+  width: 45px;
+  height: 50px;
   border-radius: 50%;
   border: 2px solid black;
   display: flex;

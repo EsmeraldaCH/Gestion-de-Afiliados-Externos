@@ -7,6 +7,7 @@ import Profile from './pages/Profile';
 
 // Importación de componentes
 import PerfilUsuario from './components/PerfilUsuario';
+import SeleccionBeneficiario from './components/SeleccionBeneficiario';
 import RegistroNino from './components/RegistroNino';
 import RegistroTerceraEdad from './components/RegistroTerceraEdad';
 import RegistroDiscacidad from './components/RegistroDiscapacidad'; 
@@ -16,6 +17,11 @@ import AdminAiKoi from './admin/AdminAiKoi';
 import Usuarios from './admin/Usuarios';
 import AgregarEvento from './admin/AgregarEvento';
 import Configuracion from './admin/Configuracion';
+
+// Importación de componentes de la vista de cada perfil
+import UsuariosNinos from './admin/UsuariosNinos';
+import UsuariosDiscapacidad from './admin/UsuariosDiscapacidad';
+import UsuariosTerceraEdad from './admin/UsuariosTerceraEdad';
 
 // Importación de páginas
 import PrivacyNotice from './pages/PrivacyNotice';
@@ -36,6 +42,7 @@ function App() {
           <Route path="/Register" element={<Register />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/perfil" element={<PerfilUsuario />} />
+          <Route path="/seleccion-beneficiario" element={<SeleccionBeneficiario />} />
           <Route path="/registro-nino" element={<RegistroNino />} />
           <Route path="/registro-tercera-edad" element={<RegistroTerceraEdad />} />
           <Route path="/registro-discapacidad" element={<RegistroDiscacidad />} />
@@ -46,6 +53,11 @@ function App() {
           <Route path="/admin/Usuarios" element={<Usuarios />} />
           <Route path="/admin/AgregarEvento" element={<AgregarEvento />} />
           <Route path="/admin/Configuracion" element={<Configuracion />} />
+
+
+          <Route path="/admin/Usuarios/Ninos" element={<UsuariosNinos />} />
+          <Route path="/admin/Usuarios/Discapacidad" element={<UsuariosDiscapacidad />} />
+          <Route path="/admin/Usuarios/TerceraEdad" element={<UsuariosTerceraEdad />} />
         </Routes>
       </Router>
     </ErrorBoundary>

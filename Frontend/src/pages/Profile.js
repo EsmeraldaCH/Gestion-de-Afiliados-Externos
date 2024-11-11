@@ -90,7 +90,7 @@ function UserProfile() {
 
             <section className="welcome-section">
                 <div className="user-info">
-                    <img src="./logofundacion.png" alt="Imagen de la Fundación" className="profile-photo" />  
+                    <img src="./logo.png" alt="Imagen de la Fundación" className="profile-photo" />  
                     <h1>¡Bienvenido, {user.displayName}!</h1>
                     <p><strong>Email:</strong> {user.email}</p>
                  

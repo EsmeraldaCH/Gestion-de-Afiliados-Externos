@@ -70,11 +70,21 @@ const handleLogin = async () => {
     if (response.ok) {
       console.log('Inicio de sesión exitoso:', data);
       setError(null);
-      alert('Inicio de sesión exitoso'); // Alerta de éxito
+      
+      // Guardar la información del usuario en localStorage
+      localStorage.setItem('user', JSON.stringify({
+        correo: correo,
+        role: data.role
+      }));
 
-
-      ///////////////////////agregar los 3 formularios
-      window.location.href = '/registro-tercera-edad'; // Ruta para mandar el usuario despues de iniciar sesión
+      // Redirigir según el rol
+      if (data.role === 'admin') {
+        alert('Bienvenido Administrador');
+        window.location.href = '/admin/AdminAiKoi'; // Redirige a la interfaz de administrador
+      } else {
+        alert('Inicio de sesión exitoso');
+        window.location.href = '/seleccion-beneficiario'; // Redirige a la selección de beneficiario
+      }
     } else {
       console.error('Error en el inicio de sesión:', data.message);
       setError(data.message || 'Hubo un problema al iniciar sesión');
@@ -82,8 +92,11 @@ const handleLogin = async () => {
   } catch (error) {
     console.error('Error en la solicitud de inicio de sesión:', error);
     setError('Error en la solicitud de inicio de sesión. Detalles: ' + error.message);
+    alert('Hubo un problema al iniciar sesión, intenta de nuevo');
   }
 };
+
+
 
   const validarContraseña = (contraseña) => {
     const errores = [];
@@ -107,6 +120,8 @@ const handleLogin = async () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+
+    // Verificar si hay errores en la contraseña antes de continuar
     if (erroresContraseña.length === 0) {
       try {
         const response = await fetch('http://localhost:5000/registro', {
@@ -117,22 +132,31 @@ const handleLogin = async () => {
           body: JSON.stringify({ correo, contraseña }),
         });
 
+        // Asegúrate de que la respuesta del servidor esté en formato JSON
         const data = await response.json();
-        if (response.ok) {
+
+        // Log de la respuesta para verificar
+        console.log('Respuesta del servidor:', data);
+
+        // Verificar si el servidor respondió correctamente
+        if (response.status === 200) {
           alert('Usuario registrado con éxito');
           setCorreo('');
           setContraseña('');
-          closeModal();
+          closeModal();  // Si tienes un modal para cerrar
         } else {
           alert(data.message || 'Hubo un problema al registrar, intenta de nuevo');
         }
+
       } catch (error) {
+        console.error('Error en el fetch:', error);
         alert('Hubo un problema al registrar, intenta de nuevo');
       }
     } else {
       alert('Por favor, corrige los errores de la contraseña antes de continuar.');
     }
-  };
+};
+
 
   return (
     <div className="home-container">
@@ -143,7 +167,7 @@ const handleLogin = async () => {
                 <a href="#e-comerce">E-commerce</a>
                 <a href="#e-learning">E-learning</a>
                 <a href="#afiliados">Afiliados</a>
-                <a href="#iniciar-sesion">Iniciar Sesión</a>
+                <a href="#login-buttons">Iniciar Sesión</a>
                 <p className="home-slogan">Dar & Recibir</p>
                 <h1 className="welcome-title">Bienvenido a Nuestro Espacio de Apoyo y Esperanza</h1>
             </div>
@@ -212,7 +236,7 @@ const handleLogin = async () => {
 </section>
 
  {/* Sección de Nuestra Encargada */}
- <section className="home-encargada">
+ <section className="home-encargada" id="login-buttons"> {/* Agrega el id aquí */}
   <div className="encargada-content">
     {/* Parte izquierda: Nombre y Descripción */}
     <div className="encargada-info">
@@ -231,8 +255,6 @@ const handleLogin = async () => {
     </div>
   </div>
 </section>
-
-
 
 {/* Botones de sesión */}
 <div className="home-buttons">

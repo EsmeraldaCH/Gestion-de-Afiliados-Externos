@@ -1,0 +1,65 @@
+/* General para la pantalla */
+.fullscreen-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #FFF5E0; /* Color de fondo */
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Contenedor del contenido */
+  .beneficiary-selection {
+    max-width: 800px;
+    width: 100%;
+    background-color: #FFFAF0;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Estilos de los botones */
+  .beneficiary-button {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    margin: 10px 0;
+    background-color: #F26512;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .beneficiary-button:hover {
+    background-color: #e05a0f;
+  }
+  
+  /* Estilos del título */
+  .beneficiary-selection h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Para dispositivos móviles */
+  @media (max-width: 768px) {
+    .beneficiary-selection {
+      padding: 20px;
+    }
+  
+    .beneficiary-selection h1 {
+      font-size: 2em;
+    }
+  
+    .beneficiary-button {
+      font-size: 1.2em;
+    }
+  }
+  
