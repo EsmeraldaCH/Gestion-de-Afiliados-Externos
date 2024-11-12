@@ -51,39 +51,52 @@ const HomePage = () => {
   };
 
   // Función para manejar el inicio de sesión 
-const handleLogin = async () => {
-  if (!correo || !contraseña) {
-    setError('Por favor, completa todos los campos.');
-    return;
-  }
-  try {
-    const response = await fetch('http://localhost:5000/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ correo, contraseña }),
-    });
-    
-    const data = await response.json();
-    
-    if (response.ok) {
-      console.log('Inicio de sesión exitoso:', data);
-      setError(null);
-      alert('Inicio de sesión exitoso'); // Alerta de éxito
-
-
-      ///////////////////////agregar los 3 formularios
-      window.location.href = '/registro-tercera-edad'; // Ruta para mandar el usuario despues de iniciar sesión
-    } else {
-      console.error('Error en el inicio de sesión:', data.message);
-      setError(data.message || 'Hubo un problema al iniciar sesión');
+  const handleLogin = async () => {
+    if (!correo || !contraseña) {
+      setError('Por favor, completa todos los campos.');
+      return;
     }
-  } catch (error) {
-    console.error('Error en la solicitud de inicio de sesión:', error);
-    setError('Error en la solicitud de inicio de sesión. Detalles: ' + error.message);
-  }
-};
+  
+    try {
+      const response = await fetch('http://localhost:5000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ correo, contraseña }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        console.log('Inicio de sesión exitoso:', data);
+        setError(null);
+        alert('Inicio de sesión exitoso'); // Alerta de éxito
+  
+        // Guardar la información del usuario en localStorage
+        localStorage.setItem('user', JSON.stringify({
+          correo: correo,
+          role: data.role
+        }));
+  
+        // Redirigir según el rol
+        if (data.role === 'admin') {
+          alert('Bienvenido Administrador');
+          window.location.href = '/admin/AdminAiKoi'; // Redirige a la interfaz de administrador
+        } else if (data.role === 'beneficiario') {
+          alert('Inicio de sesión exitoso');
+          window.location.href = '/seleccion-beneficiario'; // Redirige a la selección de beneficiario
+        }
+      } else {
+        console.error('Error en el inicio de sesión:', data.message);
+        setError(data.message || 'Hubo un problema al iniciar sesión');
+      }
+    } catch (error) {
+      console.error('Error en la solicitud de inicio de sesión:', error);
+      setError('Error en la solicitud de inicio de sesión. Detalles: ' + error.message);
+      alert('Hubo un problema al iniciar sesión, intenta de nuevo');
+    }
+  };
 
   const validarContraseña = (contraseña) => {
     const errores = [];

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './RegistroNino.css';
 
 function RegistroNino() {
@@ -44,7 +45,7 @@ function RegistroNino() {
     referenciasPersonalesProfesionales: null,
     fotoPerfil: null,
   });
-
+  const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(1); // Controla el paso actual
   console.log("Active Step: ", activeStep);
 
