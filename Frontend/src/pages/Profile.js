@@ -110,11 +110,51 @@ function UserProfile() {
             </section>
 
             <footer className="home-footer">
-                <div className="social-media">
-                    {/* Add social media icons here */}
-                </div>
-                <p className="footer-text">Fundación Ai Koi · <a href="#">Términos y Condiciones</a> · <a href="#">Aviso de Privacidad</a></p>
-            </footer>
+        <div className="social-icons">
+        <a
+            href="https://www.facebook.com/profile.php?id=100070034597140&mibextid=LQQJ4d"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="icon" src="./facebook.png" alt="Facebook" />
+          </a>
+          <a
+            href="https://www.youtube.com/@fundacionaikoi7305"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="icon" src="./youtube.png" alt="YouTube" />
+          </a>
+          <a
+            href="https://www.instagram.com/fundacionaikoi/?hl=es-la"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="icon" src="./instagram.png" alt="Instagram" />
+          </a>
+          <a
+            href="https://www.tiktok.com/@aikoiac"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="icon" src="./tik-tok.png" alt="TikTok" />
+          </a>
+          <a
+            href="https://twitter.com/fundacionaikoi"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="icon" src="./twiter.png" alt="Twitter" />
+          </a>
+          <a href="mailto:fundacion.aikoi@gmail.com" target="_blank">
+            <img className="icon" src="./gmail.png" alt="Gmail" />
+          </a>
+          <a href="https://wa.me/525610152625" target="_blank">
+            <img className="icon" src="./whatsapp.png" alt="WhatsApp" />
+          </a>
+        </div>
+        Fundación Ai Koi - <a href="./privacidad">Aviso de Privacidad</a> - <a href="./terminos">Términos y Condiciones</a> 
+      </footer>
         </div>
     );
 }

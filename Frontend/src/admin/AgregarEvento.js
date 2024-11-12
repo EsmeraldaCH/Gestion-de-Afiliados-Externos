@@ -44,32 +44,51 @@ function AgregarEvento() {
         </div>
       </section>
 
-      <footer>
-        <div className="social-media">
-          <a href="https://www.facebook.com/Ai.Koi.oficial/" target="_blank" rel="noreferrer">
-            <img src="../facebook.png" alt="Facebook" height="30px" />
+      <footer className="home-footer">
+        <div className="social-icons">
+        <a
+            href="https://www.facebook.com/profile.php?id=100070034597140&mibextid=LQQJ4d"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="icon" src="../facebook.png" alt="Facebook" />
           </a>
-          <a href="https://www.tiktok.com/@aikoiac" target="_blank" rel="noreferrer">
-            <img src="../tik-tok.png" alt="Tik-Tok" height="30px" />
+          <a
+            href="https://www.youtube.com/@fundacionaikoi7305"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="icon" src="../youtube.png" alt="YouTube" />
           </a>
-          <a href="https://twitter.com/FundacionAiKoi/status/1552848047675154432" target="_blank" rel="noreferrer">
-            <img src="../twiter.png" alt="Twitter" height="30px" />
+          <a
+            href="https://www.instagram.com/fundacionaikoi/?hl=es-la"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="icon" src="../instagram.png" alt="Instagram" />
           </a>
-          <a href="https://www.instagram.com/fundacionaikoi/" target="_blank" rel="noreferrer">
-            <img src="../instagram.png" alt="Instagram" height="30px" />
+          <a
+            href="https://www.tiktok.com/@aikoiac"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="icon" src="../tik-tok.png" alt="TikTok" />
+          </a>
+          <a
+            href="https://twitter.com/fundacionaikoi"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="icon" src="../twiter.png" alt="Twitter" />
+          </a>
+          <a href="mailto:fundacion.aikoi@gmail.com" target="_blank">
+            <img className="icon" src="../gmail.png" alt="Gmail" />
           </a>
           <a href="https://wa.me/525610152625" target="_blank">
-            <img className="icon" src="../whatsapp.png" alt="WhatsApp" height="30px" />
+            <img className="icon" src="../whatsapp.png" alt="WhatsApp" />
           </a>
-          <a href="mailto:fundacion.aikoi@gmail.com"><img src="../Gmail.png" alt="Gmail" height="30px" /></a>
-          <a href="https://www.youtube.com/channel/UCDAO6QlG-OtKvWcZgra1rtQ" target="_blank" rel="noreferrer">
-            <img src="../youtube.png" alt="YouTube" height="30px" />
-          </a>
-          <a href="#"><img src="../Linkedin.png" alt="Linkedin" height="30px" /></a>
         </div>
-        <p>
-          Fundación Ai Koi - <a href="#">Términos y Condiciones</a> - <a href="#">Aviso de Privacidad</a>
-        </p>
+        Fundación Ai Koi - <a href="../privacidad">Aviso de Privacidad</a> - <a href="../terminos">Términos y Condiciones</a> 
       </footer>
     </div>
   );

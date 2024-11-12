@@ -1,13 +1,22 @@
-import React from 'react';
-import './adminStyles.css';
+import React, { useState } from 'react';
+import './AddAdmin.css'; // Ensure you're importing the correct styles
 
-function AdminAiKoi() {
-  const handleSearch = () => {
-    const searchQuery = document.getElementById('search-input').value;
-    if (searchQuery.trim() !== "") {
-      alert(`Buscando: ${searchQuery}`);
+function AddAdmin() {
+  const [adminDetails, setAdminDetails] = useState({ email: '', password: '' });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setAdminDetails({ ...adminDetails, [name]: value });
+  };
+
+  const handleAddAdmin = (e) => {
+    e.preventDefault();
+    if (adminDetails.email && adminDetails.password) {
+      alert(`Nuevo administrador agregado: ${adminDetails.email}`);
+      // Here you would typically send the data to your server
+      setAdminDetails({ email: '', password: '' }); // Reset the form
     } else {
-      alert("Por favor ingresa algo en la barra de búsqueda.");
+      alert("Por favor completa todos los campos.");
     }
   };
 
@@ -15,49 +24,41 @@ function AdminAiKoi() {
     <div className="body-container admin-container body-admin">
       <header className="admin-header">
         <nav className="admin-nav">
-          
           <ul className="admin-nav-list">
-          <div className="header">
-        <img src="../logo.png" alt="Fundación" className="fundacion-logo" />
-      </div>
             <li className="admin-nav-item"><a href="#"><u>Inicio</u></a></li>
             <li className="admin-nav-item"><a href="#"><u>Sobre Nosotros</u></a></li>
             <li className="admin-nav-item"><a href="#"><u>Servicios</u></a></li>
             <li className="admin-nav-item"><a href="#"><u>Contacto</u></a></li>
           </ul>
-        
         </nav>
       </header>
 
       <section className="welcome-section">
-        <div className="admin-welcome">
-          <p className="admin-welcome-text">Bienvenido: xx-xx! (ADMIN)</p>
+        <div className="admin-icon">
+          <img src="../ADMING.png" alt="Icono de Admin" />
         </div>
+        <form onSubmit={handleAddAdmin} className="usuarios-panel">
+          <h2>Agregar Administrador</h2>
+          <input
+            type="email"
+            name="email"
+            placeholder="Correo electrónico"
+            value={adminDetails.email}
+            onChange={handleInputChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Contraseña"
+            value={adminDetails.password}
+            onChange={handleInputChange}
+            required
+          />
+          <button type="submit" className="button-usuario">Agregar Administrador</button>
+        </form>
       </section>
 
-      <section className="admin-panel">
-        <a href="http://localhost:3000/admin/Usuarios" className="panel-item">
-          <img src="../usAD.png" alt="Usuarios" className="panel-item-image" />
-          <p className="panel-item-text">Usuarios</p>
-        </a>
-        <a href="http://localhost:3000/admin/AgregarEvento" className="panel-item">
-          <img src="../Evnto.png" alt="Agregar Evento" className="panel-item-image" />
-          <p className="panel-item-text">Agregar Evento</p>
-        </a>
-        <a href="estadisticas.html" className="panel-item">
-          <img src="../Estadisticas.png" alt="Estadísticas" className="panel-item-image" />
-          <p className="panel-item-text">Estadísticas</p>
-        </a>
-        <a href="http://localhost:3000/admin/Configuracion" className="panel-item">
-          <img src="../Configuracion.png" alt="Configuración" className="panel-item-image" />
-          <p className="panel-item-text">Configuración</p>
-        </a>
-        <a href="http://localhost:3000/admin/AddAdmin" className="panel-item">
-          <img src="../agregaradmin.png" alt="AddAdmin" className="panel-item-image" />
-          <p className="panel-item-text">Agregar Administrador</p>
-        </a>
-
-      </section>
       <footer className="home-footer">
         <div className="social-icons">
         <a
@@ -108,4 +109,4 @@ function AdminAiKoi() {
   );
 }
 
-export default AdminAiKoi;
+export default AddAdmin;

@@ -1,127 +1,152 @@
-/* General */
-.usuarios-container {
-  font-family: Arial, sans-serif;
-  background-color: #fff5e0;
-  color: #333;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+.body-container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.header-usuarios {
+.body-admin {
+  font-family: Arial, sans-serif;
+  background-color: #fff5e0;
+  color: #010101;
+}
+
+.admin-header {
   background-color: #ffeec8;
   padding: 15px 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
-.usuarios-nav {
-  list-style: none;
+.admin-nav-list {
+  list-style-type: none;
   display: flex;
   justify-content: center;
   gap: 30px;
 }
 
-.usuarios-nav a {
+.admin-nav-item a {
   text-decoration: none;
   color: #333;
   font-weight: bold;
   font-size: 16px;
 }
 
-/* Welcome Section */
+/* Sección de bienvenida y barra de búsqueda */
 .welcome-section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: 20px;
 }
 
 .admin-icon {
-  width: 40px;
-  margin-right: 10px;
+  width: 50px;
+  margin-bottom: 15px;
 }
 
-/* Panel de Usuarios */
-.usuarios-panel {
-  max-width: 1200px;
-  margin: 40px auto;
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.category-buttons {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  margin-top: 30px;
+  flex-wrap: wrap;  /* Para asegurar que los botones se ajusten bien en pantallas pequeñas */
 }
 
-.tabla-usuarios table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.tabla-usuarios th, .tabla-usuarios td {
-  padding: 10px;
-  border: 1px solid #ccc;
-}
-
-.tabla-usuarios th {
+.button-category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* Asegura que los iconos y el texto estén centrados */
+  justify-content: center;
+  padding: 40px 40px; /* Aumentamos el tamaño de los botones */
   background-color: #ff6600;
   color: white;
-}
-
-/* Botones */
-.button-usuario {
   border: none;
-  border-radius: 5px;
-  padding: 10px;
+  border-radius: 10px; /* Esquinas más redondeadas */
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  font-weight: bold;
+  font-size: 18px; /* Aumentamos el tamaño del texto */
+  text-align: center;  /* Asegura que el texto esté centrado */
+  min-width: 200px; /* Establecemos un ancho mínimo para los botones */
+  height: 150px; /* Ajustamos la altura para dar espacio al icono y texto */
 }
 
-.modify-btn {
-  background-color: #4CAF50;
-}
-
-.delete-btn {
-  background-color: #f44336;
-}
-
-.button:hover {
-  transform: scale(1.05);
-}
-
-.search-btn:hover {
+.button-category:hover {
+  transform: scale(1.1);
   background-color: #e65c00;
 }
 
-/* Footer */
-.usuarios-footer {
+.button-category img {
+  width: 60px;  /* Aumentamos el tamaño del icono */
+  height: 60px; /* Aumentamos el tamaño del icono */
+  margin-bottom: 15px;  /* Espacio entre el icono y el texto */
+}
+
+.home-footer {
   margin-top: auto;
-  background-color: #ffeec8;
   text-align: center;
   padding: 20px;
+  background-color: #ffeec8;
+  color: rgb(15, 14, 14);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  font-size: 20px;
 }
 
-.social-media a {
-  margin: 0 5px;
+.social-icons {
+  display: flex;
+  gap: 15px;
 }
 
-footer a {
-  color: black;
+.icon {
+  width: 50px;
+  height: 50px;
+  background-size: contain;
+  cursor: pointer;
+  padding: 15px 15px;
 }
 
-/* Responsividad */
-@media (max-width: 768px) {
-  .usuarios-nav {
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .welcome-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .category-buttons {
     flex-direction: column;
     gap: 15px;
   }
 
-  .usuarios-panel {
-    padding: 15px;
+  .button-category {
+    width: 100%;
+    padding: 20px 40px; /* Ajustamos padding para pantallas pequeñas */
+    height: 140px;  /* Ajustamos la altura del botón */
+  }
+
+  .button-category img {
+    width: 35px;  /* Ajustamos tamaño del icono en pantallas pequeñas */
+    height: 35px; /* Ajustamos tamaño del icono en pantallas pequeñas */
   }
 }
 
-@media (max-width: 480px) {
-  .tabla-usuarios th, .tabla-usuarios td {
-    font-size: 14px;
+@media screen and (max-width: 480px) {
+  .admin-nav-list {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .button-category {
+    width: 100%;
+    max-width: 250px;
+    padding: 15px 30px; /* Ajustamos padding para pantallas más pequeñas */
+    height: 130px;  /* Ajustamos la altura para pantallas pequeñas */
+  }
+
+  .home-footer {
+    padding: 15px;
   }
 }

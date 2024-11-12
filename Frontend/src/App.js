@@ -17,6 +17,7 @@ import AdminAiKoi from './admin/AdminAiKoi';
 import Usuarios from './admin/Usuarios';
 import AgregarEvento from './admin/AgregarEvento';
 import Configuracion from './admin/Configuracion';
+import AddAdmin from './admin/AddAdmin';
 
 // Importación de componentes de la vista de cada perfil
 import UsuariosNinos from './admin/UsuariosNinos';
@@ -53,6 +54,7 @@ function App() {
           <Route path="/admin/Usuarios" element={<Usuarios />} />
           <Route path="/admin/AgregarEvento" element={<AgregarEvento />} />
           <Route path="/admin/Configuracion" element={<Configuracion />} />
+          <Route path="/admin/AddAdmin" element={<AddAdmin />} />
 
 
           <Route path="/admin/Usuarios/Ninos" element={<UsuariosNinos />} />

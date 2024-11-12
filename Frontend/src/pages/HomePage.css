@@ -58,9 +58,9 @@
 .static-links a {
     color: #000000;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 22px;
     transition: color 0.3s;
-    padding: 10px 60px;
+    padding: 10px 40px;
 }
 
 .static-links a:hover {
@@ -107,13 +107,13 @@
     }
 }
 
-.btn-login, .btn-register {
+.btn-login, .btn-register{
     background-color: #f26512;
     border-radius: 20px;
     padding: 20px 29px;
     margin: 0 10px;
     color: rgb(9, 0, 0);
-    font-size: 19px;
+    font-size: 22px;
     cursor: pointer;
     border-radius: 5px;
     flex: 1.5;
@@ -175,18 +175,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 90px;
-    font-size: 29px;
+    gap: 30px;
+    font-size: 20px;
 }
 
 .social-icons {
     display: flex;
-    gap: 22px;
+    gap: 15px;
 }
 
 .icon {
-    width: 55px;
-    height: 55px;
+    width: 40px;
+    height: 40px;
     background-size: contain;
     cursor: pointer;
     padding: 15px 15px;

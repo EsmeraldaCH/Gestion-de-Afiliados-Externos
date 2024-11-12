@@ -1,0 +1,129 @@
+/* General */
+.body-container {
+    font-family: Arial, sans-serif;
+    background-color: #fff5e0;
+    color: #333;
+    display: flex;
+    flex-direction: column; /* Ensures content stacks vertically */
+    min-height: 100vh;
+}
+
+/* Header */
+.admin-header {
+    background-color: #ffeec8;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.admin-nav {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.admin-nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Welcome Section */
+.welcome-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.admin-icon img {
+    width: 80px;
+    margin-right: 80px;
+}
+
+/* Panel for Adding Admin */
+.usuarios-panel {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.usuarios-panel input {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Buttons */
+.button-usuario {
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #ff6600; /* Orange */
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.button-usuario:hover {
+    background-color: #e65c00; /* Darker orange */
+    transform: scale(1.05);
+}
+
+/* Footer */
+.home-footer {
+    margin-top: auto;
+    background-color: #ffeec8;
+    text-align: center;
+    padding: 20px;
+}
+
+.footer-text a {
+    color: black;
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+    .usuarios-panel {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .usuarios-panel {
+        max-width: 90%; /* Allowing more width on smaller screens */
+    }
+
+    .usuarios-panel input {
+        width: 100%; /* Full width for inputs */
+    }
+}
+
+@media (max-width: 480px) {
+    .usuarios-panel input {
+        font-size: 14px;
+    }
+
+    .usuarios-panel {
+        padding: 10px; /* Less padding for small devices */
+    }
+}
+
+/* Large Table for Small Devices */
+@media (max-width: 768px) {
+    .tabla-usuarios {
+        width: 100%;
+        font-size: 14px; /* Adjusting font size for better visibility */
+    }
+
+    .tabla-usuarios th, .tabla-usuarios td {
+        padding: 15px; /* Increased padding for better usability */
+    }
+}
