@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './UsuariosNinos.css'
 
 function UsuariosNinos() {
   const [usuarios, setUsuarios] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate(); // Hook para redireccionar
 
   useEffect(() => {
     // Llamada al backend para obtener la lista de niños
@@ -18,31 +20,38 @@ function UsuariosNinos() {
       .catch((error) => console.error('Error:', error));
   }, []);
 
-  // Función para manejar la búsqueda
-  const handleSearch = () => {
-    if (searchQuery.trim() !== "") {
-      alert(`Buscando: ${searchQuery}`);
-    } else {
+   // Función para manejar la búsqueda
+   const handleSearch = () => {
+    if (searchQuery.trim() === "") {
       alert("Por favor ingresa algo en la barra de búsqueda.");
     }
   };
 
-  // Función para filtrar usuarios por búsqueda
-  const filteredUsuarios = usuarios.filter((usuario) =>
-    usuario.nombre.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    usuario.apellido_paterno.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    usuario.apellido_materno.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // Filtrar y limitar los usuarios
+  const filteredUsuarios = usuarios
+    .filter((usuario) =>
+      usuario.nombre.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      usuario.apellido_paterno.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      usuario.apellido_materno.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      usuario.fecha_nacimiento.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .slice(-10) // Limitar a 10 registros
+    .reverse();
 
   // Función para construir la URL de la imagen
   const getImageUrl = (imagePath) => {
     if (!imagePath) return null;
     return `http://localhost:5000/archivos/${imagePath.split('\\').pop()}`;
   };
-
+ // Función para mostrar los documentos
   const getDocumentUrl = (docPath) => {
     if (!docPath) return null;
     return `http://localhost:5000/archivos/${docPath.split('\\').pop()}`;
+  };
+
+   // Función para manejar el clic en el botón "Ver más"
+   const handleViewMore = (usuarioId) => {
+    navigate(`/usuario/${usuarioId}`); // Redirige a la vista de detalles del usuario
   };
 
   return (
@@ -71,7 +80,7 @@ function UsuariosNinos() {
               type="text" 
               id="search-input" 
               className="search-input" 
-              placeholder="Buscar..." 
+              placeholder="Buscar por nombre o apellido o fecha de nacimiento..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)} 
             />
@@ -105,6 +114,7 @@ function UsuariosNinos() {
                 <th>Fecha de Nacimiento</th>
                 <th>CURP</th>
                 <th>Nivel de Estudios</th>
+                <th>Acciones</th> {/* Nueva columna para el botón */}
               </tr>
             </thead>
             <tbody>
@@ -123,6 +133,9 @@ function UsuariosNinos() {
                   <td>{usuario.fecha_nacimiento ? new Date(usuario.fecha_nacimiento).toISOString().split('T')[0] : ''}</td>
                   <td>{usuario.curp}</td>
                   <td>{usuario.nivel_estudios}</td>
+                  <td>
+                    <button onClick={() => handleViewMore(usuario.beneficiario_id)}>Ver más</button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -351,6 +364,7 @@ function UsuariosNinos() {
         </div>
         Fundación Ai Koi-<a href="/privacidad">Aviso de Privacidad</a>-<a href="/terminos">Términos y Condiciones</a>
       </footer>
+
     </div>
   );
 }

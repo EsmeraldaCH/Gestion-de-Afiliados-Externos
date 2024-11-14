@@ -21,6 +21,8 @@ import AddAdmin from './admin/AddAdmin';
 
 // Importación de componentes de la vista de cada perfil
 import UsuariosNinos from './admin/UsuariosNinos';
+import UsuarioDetalles from './admin/UsuarioDetalles';
+
 import UsuariosDiscapacidad from './admin/UsuariosDiscapacidad';
 import UsuariosTerceraEdad from './admin/UsuariosTerceraEdad';
 
@@ -57,9 +59,14 @@ function App() {
           <Route path="/admin/AddAdmin" element={<AddAdmin />} />
 
 
-          <Route path="/admin/Usuarios/Ninos" element={<UsuariosNinos />} />
+
           <Route path="/admin/Usuarios/Discapacidad" element={<UsuariosDiscapacidad />} />
           <Route path="/admin/Usuarios/TerceraEdad" element={<UsuariosTerceraEdad />} />
+          <Route path="/admin/Usuarios/Ninos" element={<UsuariosNinos />} />
+
+         
+          <Route path="/usuario/:id" element={<UsuarioDetalles />} /> {/* Ruta para ver detalles del usuario */}
+     
         </Routes>
       </Router>
     </ErrorBoundary>

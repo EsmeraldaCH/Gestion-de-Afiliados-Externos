@@ -156,7 +156,7 @@ const HomePage = () => {
                 <a href="#e-comerce">E-commerce</a>
                 <a href="#e-learning">E-learning</a>
                 <a href="#afiliados">Afiliados</a>
-                <a href="#iniciar-sesion">Iniciar Sesión</a>
+                <a href="#login-buttons" >Iniciar Sesión</a>
                 <p className="home-slogan">Dar & Recibir</p>
                 <h1 className="welcome-title">Bienvenido a Nuestro Espacio de Apoyo y Esperanza</h1>
             </div>
@@ -225,7 +225,7 @@ const HomePage = () => {
 </section>
 
  {/* Sección de Nuestra Encargada */}
- <section className="home-encargada">
+ <section className="home-encargada" id="login-buttons"> {/* Agrega el id aquí */}
   <div className="encargada-content">
     {/* Parte izquierda: Nombre y Descripción */}
     <div className="encargada-info">
