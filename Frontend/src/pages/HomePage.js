@@ -71,21 +71,22 @@ const HomePage = () => {
       if (response.ok) {
         console.log('Inicio de sesión exitoso:', data);
         setError(null);
-        alert('Inicio de sesión exitoso'); // Alerta de éxito
   
-        // Guardar la información del usuario en localStorage
-        localStorage.setItem('user', JSON.stringify({
-          correo: correo,
-          role: data.role
-        }));
+        // Guardar la información completa del usuario en localStorage
+      localStorage.setItem('user', JSON.stringify({
+        id: data.user.id,        // Añadimos el ID
+        correo: data.user.correo,
+        role: data.role
+      }));
+
   
         // Redirigir según el rol
         if (data.role === 'admin') {
           alert('Bienvenido Administrador');
-          window.location.href = '/admin/AdminAiKoi'; // Redirige a la interfaz de administrador
+          window.location.href = '/admin/AdminAiKoi';
         } else if (data.role === 'beneficiario') {
           alert('Inicio de sesión exitoso');
-          window.location.href = '/seleccion-beneficiario'; // Redirige a la selección de beneficiario
+          window.location.href = '/seleccion-beneficiario';
         }
       } else {
         console.error('Error en el inicio de sesión:', data.message);
@@ -347,7 +348,6 @@ const HomePage = () => {
           </div>
           </div>
       )}
-
 
       <section className="home-media">
         <div className="home-tutorial">

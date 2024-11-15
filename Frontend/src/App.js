@@ -58,8 +58,6 @@ function App() {
           <Route path="/admin/Configuracion" element={<Configuracion />} />
           <Route path="/admin/AddAdmin" element={<AddAdmin />} />
 
-
-
           <Route path="/admin/Usuarios/Discapacidad" element={<UsuariosDiscapacidad />} />
           <Route path="/admin/Usuarios/TerceraEdad" element={<UsuariosTerceraEdad />} />
           <Route path="/admin/Usuarios/Ninos" element={<UsuariosNinos />} />

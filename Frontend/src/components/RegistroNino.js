@@ -4,6 +4,7 @@ import './RegistroNino.css';
 
 function RegistroNino() {
   const [formData, setFormData] = useState({
+    beneficiarioId: JSON.parse(localStorage.getItem('user'))?.id || '',
     nombre: "",
     apellidoPaterno: "",
     apellidoMaterno: "",
@@ -124,104 +125,124 @@ function RegistroNino() {
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-  // Verifica si estamos en el paso 5 antes de proceder
+  // Obtener el ID del beneficiario del localStorage
+  const userData = JSON.parse(localStorage.getItem('user'));
+  if (!userData || !userData.id) {
+    alert('Error: No se encontró la información del usuario. Por favor, inicie sesión nuevamente.');
+    navigate('/login'); // O redirige a donde sea apropiado
+    return;
+  }
+
+  // Verifica si estamos en el paso 6 antes de proceder
   if (activeStep !== 6) {
     console.log("No puedes enviar el formulario en este paso");
     return; // No hacer nada si no estamos en el paso 6
   }
 
+  // Agregar elementos adicionales a los arrays si existen
   const serviciosVivienda = [...formData.serviciosVivienda];
-if (formData.otroServicioVivienda) {
+  if (formData.otroServicioVivienda) {
     serviciosVivienda.push(formData.otroServicioVivienda);
-}
+  }
+
   const serviciosComunitarios = [...formData.serviciosComunitarios];
   if (formData.otroServicioComunitario) {
     serviciosComunitarios.push(formData.otroServicioComunitario);
   }
+
   const antecedentesPatologicos = [...formData.antecedentesPatologicos];
   if (formData.otroAntecedentesPatologicos) {
     antecedentesPatologicos.push(formData.otroAntecedentesPatologicos);
   }
+
   const serviciosSalud = [...formData.serviciosSalud];
   if (formData.otroServicioSalud) {
     serviciosSalud.push(formData.otroServicioSalud);
   }
 
-  // Crear un FormData para enviar archivos y otros datos 
+  // Crear un FormData para enviar archivos y otros datos
   const data = new FormData();
-   
-   // Agregar otros campos de texto directamente
-   Object.keys(formData).forEach((key) => {
-     if (
-       key !== 'archivos' &&
-       key !== 'informeMedico' &&
-       key !== 'historialMedico' &&
-       key !== 'certificadosTratamientosPaliativos' &&
-       key !== 'comprobanteDomicilio' &&
-       key !== 'curpDocumento' &&
-       key !== 'documentoIdentidad' &&
-       key !== 'declaracionImpuestos' &&
-       key !== 'comprobanteIngresos' &&
-       key !== 'cartaAntecedentesNoPenales' &&
-       key !== 'referenciasPersonalesProfesionales' &&
-       key !== 'fotoPerfil'
-     ) {
-       data.append(key, formData[key]);
-     }
-   });
- 
-   // Agregar los archivos de Información Médica
-   if (formData.informeMedico) {
-     data.append('informeMedico', formData.informeMedico);
-   }
-   if (formData.historialMedico) {
-     data.append('historialMedico', formData.historialMedico);
-   }
-   if (formData.certificadosTratamientosPaliativos) {
-     data.append('certificadosTratamientosPaliativos', formData.certificadosTratamientosPaliativos);
-   }
-   if (formData.comprobanteDomicilio) {
+
+  // Agregar el ID del beneficiario al FormData
+  console.log('El ID del beneficiario para Frontend es:', userData.id);
+  data.append('beneficiarioId', parseInt(userData.id, 10));  // Esto asegura que el ID sea un número
+
+  // Agregar otros campos de texto directamente
+  Object.keys(formData).forEach((key) => {
+    if (
+      key !== 'archivos' &&
+      key !== 'informeMedico' &&
+      key !== 'historialMedico' &&
+      key !== 'certificadosTratamientosPaliativos' &&
+      key !== 'comprobanteDomicilio' &&
+      key !== 'curpDocumento' &&
+      key !== 'documentoIdentidad' &&
+      key !== 'declaracionImpuestos' &&
+      key !== 'comprobanteIngresos' &&
+      key !== 'cartaAntecedentesNoPenales' &&
+      key !== 'referenciasPersonalesProfesionales' &&
+      key !== 'fotoPerfil' 
+    ) {
+      data.append(key, formData[key]);
+    }
+  });
+
+  // Agregar los archivos de Información Médica
+  if (formData.informeMedico) {
+    data.append('informeMedico', formData.informeMedico);
+  }
+  if (formData.historialMedico) {
+    data.append('historialMedico', formData.historialMedico);
+  }
+  if (formData.certificadosTratamientosPaliativos) {
+    data.append('certificadosTratamientosPaliativos', formData.certificadosTratamientosPaliativos);
+  }
+  if (formData.comprobanteDomicilio) {
     data.append('comprobanteDomicilio', formData.comprobanteDomicilio);
-   }
-   if (formData.curpDocumento) {
+  }
+  if (formData.curpDocumento) {
     data.append('curpDocumento', formData.curpDocumento);
-   }
-   if (formData.documentoIdentidad) {
+  }
+  if (formData.documentoIdentidad) {
     data.append('documentoIdentidad', formData.documentoIdentidad);
-   }
-   if (formData.declaracionImpuestos) {
+  }
+  if (formData.declaracionImpuestos) {
     data.append('declaracionImpuestos', formData.declaracionImpuestos);
-   }
-   if (formData.comprobanteIngresos) {
+  }
+  if (formData.comprobanteIngresos) {
     data.append('comprobanteIngresos', formData.comprobanteIngresos);
-   }
-   if (formData.cartaAntecedentesNoPenales) {
+  }
+  if (formData.cartaAntecedentesNoPenales) {
     data.append('cartaAntecedentesNoPenales', formData.cartaAntecedentesNoPenales);
-   }
-   if (formData.referenciasPersonalesProfesionales) {
+  }
+  if (formData.referenciasPersonalesProfesionales) {
     data.append('referenciasPersonalesProfesionales', formData.referenciasPersonalesProfesionales);
-   }
-   if (formData.fotoPerfil) {
+  }
+  if (formData.fotoPerfil) {
     data.append('fotoPerfil', formData.fotoPerfil);
-   }
+  }
 
   try {
+    // Enviar el FormData con fetch
     const response = await fetch('http://localhost:5000/api/ninos', {
       method: 'POST',
       body: data // Aquí enviamos el FormData en lugar de JSON
     });
 
+    const responseData = await response.json();
+
     if (response.ok) {
-      window.location.href = 'http://localhost:3000/Profile';
       alert('Datos enviados correctamente');
+      navigate('/Profile');
     } else {
-      throw new Error('Error en el servidor al guardar los datos');
+      throw new Error(responseData.message || 'Error en el servidor al guardar los datos');
     }
   } catch (error) {
     console.error('Error al enviar los datos:', error);
-    alert('Hubo un problema al enviar los datos');
+    alert('Hubo un problema al enviar los datos: ' + error.message);
   }
 };
+
 
   return (
     <form onSubmit={handleSubmit} className="registro-container">

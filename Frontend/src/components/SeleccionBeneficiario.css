@@ -1,65 +1,194 @@
-/* General para la pantalla */
+/* Estilos generales para el body */
+.body-container {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.body-beneficiary {
+  font-family: Arial, sans-serif;
+  background-color: #fff5e0;
+  color: #010101;
+}
+
+/* Header */
+.beneficiary-header {
+  background-color: #ffeec8;
+  padding: 10px 0;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.fundacion-logo {
+  height: 100px; /* Ajusta el tamaño del logo */
+}
+
+.header-logo-right {
+  height: 100px; /* Ajusta el tamaño de la imagen de dar */
+}
+
+.beneficiary-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.beneficiary-nav-list {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.beneficiary-nav-item a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+/* Estilos de los botones */
+.beneficiary-button {
+  display: block;
+  width: 100%;
+  padding: 20px;
+  margin: 10px 0;
+  background-color: #F26512;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.5em;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+}
+
+.beneficiary-button span {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.button-logo {
+  width: 50px;
+  height: 50px;
+  margin-top: 10px;
+}
+
 .fullscreen-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #FFF5E0; /* Color de fondo */
-    font-family: 'Arial', sans-serif;
-    color: #333;
-    text-align: center;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  /* Contenedor del contenido */
-  .beneficiary-selection {
-    max-width: 800px;
-    width: 100%;
-    background-color: #FFFAF0;
-    border-radius: 10px;
-    padding: 40px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Estilos de los botones */
-  .beneficiary-button {
-    display: block;
-    width: 100%;
-    padding: 20px;
-    margin: 10px 0;
-    background-color: #F26512;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.5em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .beneficiary-button:hover {
-    background-color: #e05a0f;
-  }
-  
-  /* Estilos del título */
-  .beneficiary-selection h1 {
-    font-size: 2.5em;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  /* Para dispositivos móviles */
-  @media (max-width: 768px) {
-    .beneficiary-selection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #FFF5E0;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+
+}
+
+.beneficiary-selection {
+  max-width: 800px;
+  width: 100%;
+  background-color: #FFFAF0;
+  border-radius: 10px;
+  padding: 40px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.beneficiary-selection h1 {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Footer */
+.beneficiary-footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 20px;
+  background-color: #ffeec8;
+  color: rgb(15, 14, 14);
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  font-size: 18px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  cursor: pointer;
+  padding: 15px 15px;
+}
+
+.icon a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .fullscreen-container {
       padding: 20px;
-    }
-  
-    .beneficiary-selection h1 {
-      font-size: 2em;
-    }
-  
-    .beneficiary-button {
-      font-size: 1.2em;
-    }
   }
-  
+
+  .beneficiary-selection {
+      padding: 20px;
+  }
+
+  .beneficiary-selection h1 {
+      font-size: 2em;
+  }
+
+  .beneficiary-button {
+      font-size: 1.2em;
+  }
+
+  .beneficiary-footer {
+      flex-direction: column;
+      gap: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .beneficiary-nav-list {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .beneficiary-button {
+      font-size: 1.2em;
+  }
+
+  .beneficiary-footer {
+      padding: 15px;
+  }
+
+  .footer-text {
+      font-size: 12px;
+  }
+}
