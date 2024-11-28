@@ -1,65 +1,253 @@
-import React, { useState } from 'react';
-import './AddAdmin.css'; // Ensure you're importing the correct styles
+import React, { useState, useEffect } from 'react';
+import './AddAdmin.css';
 
 function AddAdmin() {
-  const [adminDetails, setAdminDetails] = useState({ email: '', password: '' });
+  // Estados para los detalles del nuevo administrador
+  const [adminDetails, setAdminDetails] = useState({
+    nombre: '',
+    correo: '',
+    curp: '',
+    contraseña: ''
+  });
+
+  // Estado para la lista de administradores
+  const [adminList, setAdminList] = useState({ activos: [], inactivos: [] });
+
+  // Estado para la alerta
+  const [showAlert, setShowAlert] = useState(false);  // Agregar estado para la alerta
+  const [password, setPassword] = useState("");        // Agregar estado para la contraseña
+  const [selectedAdmin, setSelectedAdmin] = useState(null); // Para saber qué administrador se está desactivando
+  const [alertMessage, setAlertMessage] = useState(null);  // Mensaje de alerta
+
+  useEffect(() => {
+    const fetchAdmins = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/admin/list');
+        const data = await response.json();
+        setAdminList(data);
+      } catch (error) {
+        console.error('Error al obtener la lista de administradores:', error);
+      }
+    };
+    fetchAdmins();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setAdminDetails({ ...adminDetails, [name]: value });
   };
 
-  const handleAddAdmin = (e) => {
+  const handleAddAdmin = async (e) => {
     e.preventDefault();
-    if (adminDetails.email && adminDetails.password) {
-      alert(`Nuevo administrador agregado: ${adminDetails.email}`);
-      // Here you would typically send the data to your server
-      setAdminDetails({ email: '', password: '' }); // Reset the form
-    } else {
-      alert("Por favor completa todos los campos.");
+    if (!adminDetails.nombre || !adminDetails.correo || !adminDetails.curp || !adminDetails.contraseña) {
+      setAlertMessage('Por favor, completa todos los campos.');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:5000/api/admin/add-admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(adminDetails)
+      });
+
+      const data = await response.json();
+      if (response.ok) {
+        setAlertMessage('Administrador agregado correctamente');
+        setAdminDetails({ nombre: '', correo: '', curp: '', contraseña: '' });
+  
+        // Recargar la página después de mostrar la alerta
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000); // Esperar 2 segundos antes de recargar
+      } else {
+        setAlertMessage(data.error || 'Hubo un error al agregar el administrador.');
+      }
+    } catch (error) {
+      console.error('Error al agregar el administrador:', error);
+      setAlertMessage('Error al agregar el administrador.');
     }
   };
 
+  const handleDeactivateClick = (adminId) => {
+    setSelectedAdmin(adminId);
+    setShowAlert(true);  // Mostrar alerta personalizada
+  };
+
+  const handleDeactivateConfirm = async () => {
+    if (!password) {
+      setAlertMessage("Por favor, ingrese su contraseña."); // Mensaje de error personalizado
+      return;
+    }
+  
+    try {
+      const response = await fetch("http://localhost:5000/api/admin/deactivate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ adminId: selectedAdmin, principalPassword: password }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        // Mostrar mensaje de éxito
+        setAlertMessage("Se dio de baja correctamente.");
+        setShowAlert(false); // Cerrar la ventana de confirmación
+        setTimeout(() => {
+          window.location.reload(); // Recarga la página después de mostrar el mensaje
+        }, 2000); // Esperar 2 segundos antes de recargar
+      } else {
+        // Mostrar error devuelto por el backend
+        setAlertMessage(data.message || "Ocurrió un error al desactivar al administrador.");
+      }
+    } catch (error) {
+      console.error("Error al desactivar al administrador:", error);
+      setAlertMessage("Ocurrió un error inesperado.");
+    } finally {
+      setPassword(""); // Limpiar el campo de contraseña
+    }
+  };
+  
+  
+
+  // Función para cerrar la alerta
+  const closeAlert = () => {
+    setShowAlert(false);  // Cerrar alerta
+  };
+
   return (
-    <div className="body-container admin-container body-admin">
+    <div className="body-container admin-container">
       <header className="admin-header">
         <nav className="admin-nav">
           <ul className="admin-nav-list">
-            <li className="admin-nav-item"><a href="#"><u>Inicio</u></a></li>
-            <li className="admin-nav-item"><a href="#"><u>Sobre Nosotros</u></a></li>
-            <li className="admin-nav-item"><a href="#"><u>Servicios</u></a></li>
-            <li className="admin-nav-item"><a href="#"><u>Contacto</u></a></li>
+            <li className="admin-nav-item"><a href="#">Inicio</a></li>
+            <li className="admin-nav-item"><a href="#">Sobre Nosotros</a></li>
+            <li className="admin-nav-item"><a href="#">Servicios</a></li>
+            <li className="admin-nav-item"><a href="#">Contacto</a></li>
           </ul>
         </nav>
       </header>
 
-      <section className="welcome-section">
-        <div className="admin-icon">
-          <img src="../ADMING.png" alt="Icono de Admin" />
-        </div>
-        <form onSubmit={handleAddAdmin} className="usuarios-panel">
+      <div className="admin-container-administrador">
+      <section className="admin-section active-admins">
+        <h2>Administradores Activos</h2>
+        <ul className="admin-list">
+          {adminList.activos.map((admin, index) => (
+            <li key={admin.id} className="admin-item">
+               {/* Mostrar el botón solo si no es el primer administrador */}
+              <p><strong>Nombre: </strong> {admin.nombre}</p>
+              <p><strong>Correo: </strong> {admin.correo}</p>
+              <p><strong>CURP: </strong> {admin.curp}</p>
+              <p><strong>Estado: </strong> {admin.estado}</p>
+              {index === 0 && (
+             <p><strong>Administrador: </strong>Principal </p>
+              )}
+              {/* Mostrar el botón solo si no es el primer administrador */}
+              {index !== 0 && (
+                <button 
+                  onClick={() => handleDeactivateClick(admin.id)}
+                  className="btn-deactivate-admin"
+                >
+                  Desactivar
+                </button>
+              )}
+            </li>
+          ))}
+        </ul>
+        </section>
+        <section className="admin-section inactive-admins">
+        <h2>Administradores Inactivos</h2>
+        <ul className="admin-list inactive">
+          {adminList.inactivos.map((admin) => (
+            <li key={admin.id} className="admin-item">
+              <p><strong>Nombre: </strong> {admin.nombre}</p>
+              <p><strong>Correo:</strong> {admin.correo}</p>
+              <p><strong>CURP:</strong> {admin.curp}</p>
+              <p><strong>Estado:</strong> {admin.estado}</p>
+            </li>
+          ))}
+        </ul>
+        </section>
+
+
+      <section className="admin-section add-admin">
+        <form onSubmit={handleAddAdmin} className="usuarios-panel-admin">
           <h2>Agregar Administrador</h2>
+
+          <input
+            type="text"
+            name="nombre"
+            placeholder="Nombre del Administrador"
+            value={adminDetails.nombre}
+            onChange={handleInputChange}
+            required
+          />
           <input
             type="email"
-            name="email"
+            name="correo"
             placeholder="Correo electrónico"
-            value={adminDetails.email}
+            value={adminDetails.correo}
             onChange={handleInputChange}
+            required
+          />
+          <input
+            type="text"
+            name="curp"
+            placeholder="CURP"
+            value={adminDetails.curp}
+            onChange={handleInputChange}
+            maxLength="18"
             required
           />
           <input
             type="password"
-            name="password"
+            name="contraseña"
             placeholder="Contraseña"
-            value={adminDetails.password}
+            value={adminDetails.contraseña}
             onChange={handleInputChange}
             required
           />
-          <button type="submit" className="button-usuario">Agregar Administrador</button>
+          <button type="submit" className="button-usuario-admin">Agregar Administrador</button>
         </form>
       </section>
 
-      <footer className="home-footer">
+      </div>
+
+
+{/* Alerta personalizada de confirmación */}
+{showAlert && (
+  <div className="custom-alert">
+    <div className="alert-content">
+      <h2>Confirmar Desactivación</h2>
+      <p>Ingrese su contraseña para confirmar la desactivación del administrador.</p>
+      <input
+        type="password"
+        placeholder="Ingrese su contraseña"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="alert-input"
+      />
+      <div className="alert-buttons">
+        <button onClick={handleDeactivateConfirm} className="btn-confirm">
+          Aceptar
+        </button>
+        <button onClick={closeAlert} className="btn-cancel">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+{/* Alerta personalizada para mostrar mensajes */}
+{alertMessage && (
+  <div className="custom-alert-message">
+    <p>{alertMessage}</p>
+  </div>
+)}
+
+
+<footer className="home-footer">
         <div className="social-icons">
         <a
             href="https://www.facebook.com/profile.php?id=100070034597140&mibextid=LQQJ4d"

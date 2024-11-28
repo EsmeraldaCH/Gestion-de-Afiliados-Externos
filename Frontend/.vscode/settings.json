@@ -9,5 +9,9 @@
             "addWords": true,
             "scope": "workspace"
         }
-    }
+    },
+    "cSpell.ignoreWords": [
+        "Nino",
+        "Registro"
+    ]
 }

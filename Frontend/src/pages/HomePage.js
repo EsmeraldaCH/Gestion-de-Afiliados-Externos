@@ -12,6 +12,11 @@ const HomePage = () => {
   const [error, setError] = useState(null);
   const [showMenu, setShowMenu] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false); 
+  const [alert, setAlert] = useState({ message: '', type: '' }); // Estado para las alertas
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false); // Controlar el modal de inicio de sesión
+
+
 
   const handleScroll = () => {
     const linksSection = document.querySelector('.links-section');
@@ -53,7 +58,7 @@ const HomePage = () => {
   // Función para manejar el inicio de sesión 
   const handleLogin = async () => {
     if (!correo || !contraseña) {
-      setError('Por favor, completa todos los campos.');
+      setAlert({ message: 'Por favor, completa todos los campos.', type: 'error' });
       return;
     }
   
@@ -72,32 +77,40 @@ const HomePage = () => {
         console.log('Inicio de sesión exitoso:', data);
         setError(null);
   
-        // Guardar la información completa del usuario en localStorage
-      localStorage.setItem('user', JSON.stringify({
-        id: data.user.id,        // Añadimos el ID
-        correo: data.user.correo,
-        role: data.role
-      }));
+          // Guardar la información completa del usuario en localStorage
+          localStorage.setItem('user', JSON.stringify({
+            id: data.user.id,
+            nombre: data.user.nombre,
+            correo: data.user.correo,
+            role: data.role,
+            isPrincipal: data.user.isPrincipal // Importante: guardar isPrincipal
+        }));
 
   
-        // Redirigir según el rol
-        if (data.role === 'admin') {
-          alert('Bienvenido Administrador');
-          window.location.href = '/admin/AdminAiKoi';
-        } else if (data.role === 'beneficiario') {
-          alert('Inicio de sesión exitoso');
-          window.location.href = '/seleccion-beneficiario';
-        }
+        // Mostrar modal de éxito
+        setShowLoginModal(true);
+  
+        // Redirigir después de un tiempo según el rol
+        setTimeout(() => {
+          setShowLoginModal(false);
+          if (data.role === 'admin') {
+            // Redirigir usando la URL dinámica del backend
+            window.location.href = data.redirectUrl;
+            
+          } else if (data.role === 'beneficiario') {
+            window.location.href = data.redirectUrl;
+          }
+        }, 2000); // Redirige después de 5 segundos
       } else {
         console.error('Error en el inicio de sesión:', data.message);
-        setError(data.message || 'Hubo un problema al iniciar sesión');
+        setAlert({ message: data.message || 'Hubo un problema al iniciar sesión.', type: 'error' });
       }
     } catch (error) {
       console.error('Error en la solicitud de inicio de sesión:', error);
-      setError('Error en la solicitud de inicio de sesión. Detalles: ' + error.message);
-      alert('Hubo un problema al iniciar sesión, intenta de nuevo');
+      setAlert({ message: 'Hubo un problema al iniciar sesión, intenta de nuevo.', type: 'error' });
     }
   };
+  
 
   const validarContraseña = (contraseña) => {
     const errores = [];
@@ -133,23 +146,40 @@ const HomePage = () => {
 
         const data = await response.json();
         if (response.ok) {
-          alert('Usuario registrado con éxito');
-          setCorreo('');
-          setContraseña('');
-          closeModal();
+          // Mostrar modal de éxito
+          setShowSuccessModal(true);
+          setContraseña(''); // Limpiar los campos de correo y contraseña antes de la redirección
+          
+          setTimeout(() => { 
+            setShowSuccessModal(false);
+            setView('login'); // Redirigir al login después de 5 segundos
+          }, 5000);
+
         } else {
-          alert(data.message || 'Hubo un problema al registrar, intenta de nuevo');
+          // Mostrar alerta con el mensaje del backend
+          setAlert({
+            message: data.message || 'Hubo un problema al registrar, intenta de nuevo.',
+            type: 'error',
+          });
+          setTimeout(() => setAlert({ message: '', type: '' }), 3000);
         }
       } catch (error) {
-        alert('Hubo un problema al registrar, intenta de nuevo');
+        setAlert({ message: 'Error de conexión, intenta más tarde.', type: 'error' });
+        setTimeout(() => setAlert({ message: '', type: '' }), 3000);
       }
     } else {
-      alert('Por favor, corrige los errores de la contraseña antes de continuar.');
+      setAlert({
+        message: 'Corrige los errores en la contraseña antes de continuar.',
+        type: 'error',
+      });
+      setTimeout(() => setAlert({ message: '', type: '' }), 3000);
     }
   };
 
+
   return (
     <div className="home-container">
+
         <header className="home-header">
             <img src="./logo.png" alt="Logo de la Fundación" className="home-logo" />
             <div className="links-section static-links">
@@ -164,8 +194,8 @@ const HomePage = () => {
         </header>
         
 
-{/* Nuevas secciones */}
-<section className="home-sections">
+  {/* Nuevas secciones */}
+  <section className="home-sections">
   <h2 className="section-title">¿Quiénes forman parte de nuestra visión?</h2>
   <div className="section-item">
 
@@ -211,11 +241,11 @@ const HomePage = () => {
   </div> 
   </div>
 
-</section>
+  </section>
 
 
-{/* Galería de imágenes */}
-<section className="home-gallery">
+  {/* Galería de imágenes */}
+  <section className="home-gallery">
   <h2 className="gallery-title">Nuestro Impacto de la Fundación</h2>
   <div className="gallery-row">
     <img src="./actividades_imagen2.png" alt="Actividad 1" className="gallery-image" />
@@ -223,10 +253,10 @@ const HomePage = () => {
     <img src="./actividades_imagen1.png" alt="Actividad 3" className="gallery-image" />
     <img src="./actividades_imagen3.png" alt="Actividad 4" className="gallery-image" />
   </div>
-</section>
+  </section>
 
- {/* Sección de Nuestra Encargada */}
- <section className="home-encargada" id="login-buttons"> {/* Agrega el id aquí */}
+   {/* Sección de Nuestra Encargada */}
+   <section className="home-encargada" id="login-buttons"> {/* Agrega el id aquí */}
   <div className="encargada-content">
     {/* Parte izquierda: Nombre y Descripción */}
     <div className="encargada-info">
@@ -244,12 +274,11 @@ const HomePage = () => {
       <img src="./licenciada.png" alt="Lic. Adriana" className="photo-image" />
     </div>
   </div>
-</section>
+  </section>
 
 
-
-{/* Botones de sesión */}
-<div className="home-buttons">
+    {/* Botones de sesión */}
+    <div className="home-buttons">
         <button className="btn-login" onClick={() => openModal('login')}>
           Iniciar Sesión
         </button>
@@ -259,95 +288,134 @@ const HomePage = () => {
       </div>
         
       {showModal && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="modal-left">
-              <img src="./logo.png" alt="Fundación Ai Koi" className="modal-logo" />
-            </div>
-            <div className="modal-right">
-              {view === 'login' ? (
-                <div>
-                  <h2>Iniciar Sesión</h2>
-                  <input
-                    type="email"
-                    placeholder="Ingrese su Correo electrónico"
-                    className="input-field"
-                    value={correo}
-                    onChange={(e) => setCorreo(e.target.value)}
-                  />
-                  <div className="password-container">
-                    <input
-                      type={showPassword ? 'text' : 'password'}
-                      placeholder="Ingrese su Contraseña"
-                      className="input-field"
-                      value={contraseña}
-                      onChange={(e) => setContraseña(e.target.value)}
-                    />
-                  </div>
-                  <button className="register-btn" onClick={handleLogin}>
-                    Ingresar
-                  </button>
-                  {error && <p className="error-message">{error}</p>}
-                  <button className="btn-google" onClick={handleGoogleLogin}>
-                    <img src="./google.png" alt="Google Icon" className="google-icon" />
-                    Iniciar sesión con Google
-                  </button>
-                  <p className="login-link">
-                    ¿No tienes una cuenta?{' '}
-                    <a onClick={() => setView('register')}>
-                      Regístrate aquí
-                    </a>
-
-                  </p>
-                </div>
-              ) : (
-                <div>
-                  <h1>Crear Cuenta</h1>
-                  <input
-                    type="email"
-                    placeholder="Ingrese su Correo Electrónico"
-                    className="input-field"
-                    value={correo}
-                    onChange={(e) => setCorreo(e.target.value)}
-                  />
-                  <div className="password-container">
-                    <input
-                      type={showPassword ? 'text' : 'password'}
-                      placeholder="Ingrese su Contraseña"
-                      className="input-field"
-                      value={contraseña}
-                      onChange={(e) => {
-                        setContraseña(e.target.value);
-                        validarContraseña(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <ul className="error-list">
-                    {erroresContraseña.map((error, index) => (
-                      <li key={index} className="error-message">
-                        {error}
-                      </li>
-                    ))}
-                  </ul>
-                  <button className="register-btn" onClick={handleRegister}>
-                    Crear cuenta 
-                  </button>
-                  <button className="btn-google" onClick={handleGoogleLogin}>
-                    <img src="./google.png" alt="Google Icon" className="google-icon" />
-                    Registrarse con Google
-                  </button>
-                  <p className="register-link">
-                    ¿Ya tienes una cuenta?{' '}
-                    <a onClick={() => setView('login')}>
-                      Inicia sesión aquí
-                    </a>
-                  </p>
-                </div>
-              )}
+  <div className="modal-overlay" onClick={closeModal}>
+    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      {view === 'login' ? (
+        <>
+          <div className="modal-left">
+            <img src="./logo.png" alt="Fundación Ai Koi" className="modal-logo" />
+          </div>
+          <div className="modal-right">
+            <div>
+              <h1>Iniciar Sesión</h1>
+              <input
+                type="email"
+                placeholder="Ingrese su Correo electrónico"
+                className="input-field"
+                value={correo}
+                onChange={(e) => setCorreo(e.target.value)}
+              />
+              <div className="password-container">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Ingrese su Contraseña"
+                  className="input-field"
+                  value={contraseña}
+                  onChange={(e) => setContraseña(e.target.value)}
+                />
+              </div>
+              <button className="register-btn" onClick={handleLogin}>
+                Ingresar
+              </button>
+              {error && <p className="error-message">{error}</p>}
+              <button className="btn-google" onClick={handleGoogleLogin}>
+                <img src="./google.png" alt="Google Icon" className="google-icon" />
+                Iniciar sesión con Google
+              </button>
+              <p className="login-link">
+                ¿No tienes una cuenta?{' '}
+                <a onClick={() => setView('register')}>
+                  Regístrate aquí
+                </a>
+              </p>
             </div>
           </div>
+        </>
+      ) : (
+        <>
+          <div className="modal-left register-mode">
+            <div>
+              <h1>Crear Cuenta</h1>
+              <input
+                type="email"
+                placeholder="Ingrese su Correo Electrónico"
+                className="input-field"
+                value={correo}
+                onChange={(e) => setCorreo(e.target.value)}
+              />
+              <div className="password-container">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Ingrese su Contraseña"
+                  className="input-field"
+                  value={contraseña}
+                  onChange={(e) => {
+                    setContraseña(e.target.value);
+                    validarContraseña(e.target.value);
+                  }}
+                />
+              </div>
+              <ul className="error-list">
+                {erroresContraseña.map((error, index) => (
+                  <li key={index} className="error-message">
+                    {error}
+                  </li>
+                ))}
+              </ul>
+              <button className="register-btn" onClick={handleRegister}>
+                Crear cuenta 
+              </button>
+              <button className="btn-google" onClick={handleGoogleLogin}>
+                <img src="./google.png" alt="Google Icon" className="google-icon" />
+                Registrarse con Google
+              </button>
+              <p className="register-link">
+                ¿Ya tienes una cuenta?{' '}
+                <a onClick={() => setView('login')}>
+                  Inicia sesión
+                </a>
+              </p>
+            </div>
           </div>
+          <div className="modal-right register-mode">
+            <img src="./logo.png" alt="Fundación Ai Koi" className="modal-logo" />
+          </div>
+        </>
       )}
+    </div>
+  </div>
+)}
+
+{alert.message && (
+  <div className={`alert ${alert.type}`}>
+    {alert.message}
+  </div>
+)}
+
+ {/* Modal de éxito */}
+ {showSuccessModal && (
+        <div className="modal-overlay">
+          <div className="success-modal">
+            <h2>¡Cuenta creada con éxito!</h2>
+            <p>Ahora puedes iniciar sesión, por favor ingresa tus datos para acceder a tu cuenta.</p>
+            <button onClick={() => { setShowSuccessModal(false); setView('login'); }}>
+              Aceptar
+            </button>
+          </div>
+        </div>
+      )}
+{/* Modal de inicio de sesión exitoso */}
+{showLoginModal && (
+  <div className="modal-overlay">
+    <div className="success-modal">
+      <h2>¡Inicio de sesión exitoso!</h2>
+      <p> Serás redirigido en breve.</p>
+
+    </div>
+  </div>
+)}
+
+
 
       <section className="home-media">
         <div className="home-tutorial">
@@ -373,8 +441,12 @@ const HomePage = () => {
           ></iframe>
         </div>
       </section>
- {/* Redes sociales */}
- <footer className="home-footer">
+
+
+    
+
+  {/* Redes sociales */}
+  <footer className="home-footer">
         <div className="social-icons">
         <a
             href="https://www.facebook.com/profile.php?id=100070034597140&mibextid=LQQJ4d"

@@ -14,26 +14,35 @@
 
 .modal-content {
   display: flex;
-  background-color: #FFF5E0; /* Fondo del modal */
+  background-color: #FFF5E0;
   border-radius: 10px;
   width: 90%;
   max-width: 600px;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.modal-left {
+.modal-left, .modal-right {
   width: 50%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Nuevos estilos para el modo registro */
+.modal-left.register-mode {
+  order: 1;
+}
+
+.modal-right.register-mode {
+  order: 2;
 }
 
 .modal-logo {
   width: 100%;
   height: auto;
-}
-
-.modal-right {
-  width: 50%;
-  padding: 20px;
+  max-width: 300px;
 }
 
 /* Estilos para los campos de input */
@@ -91,6 +100,8 @@
   border-radius: 5px;
   cursor: pointer;
   margin-top: 10px;
+  margin-bottom: 5px;
+  font-size: 16px;
 }
 
 .register-btn:hover {

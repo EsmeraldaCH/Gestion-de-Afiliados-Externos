@@ -1,183 +1,329 @@
 body {
-    background-color: #FFF5E0;
+  background-color: #FFF5E0;
+}
+
+.registro-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.fundacion-logo {
+  width: 150px;
+}
+
+.slogan {
+  font-size: 25px;
+  font-family: Kite One;
+  color: #f26512;
+  height: 65px;
+}
+
+.progress-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.progress-circle {
+  width: 45px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  background-color: #FFF5E0; /* Color de fondo de los círculos */
+  color: black;
+}
+
+.progress-circle.completed {
+  background-color: #f26512; /* Color de los círculos completados */
+  color: white;
+}
+
+.progress-circle.active {
+  border-color: #f26512; /* Color de borde para el círculo activo */
+}
+
+.form-section {
+  margin-bottom: 20px;
+  flex: 1; 
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #FFEEC8;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  background-color: #f26512;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  justify-content: space-between;
+
+}
+
+button:hover {
+  background-color: #d04d10;
+  justify-content: space-between;
+}
+
+/* Alinear los botones en el contenedor de navegación */
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between; /* Coloca los botones en extremos opuestos */
+  width: 100%;
+  margin-top: 20px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1px; /* Espacio entre el input y la sección de no aplica */
+}
+
+.contact-item input[type="text"] {
+  flex: 5; /* El input ocupará 4 partes del espacio */
+}
+
+.contact-item label {
+  display: flex;
+  align-items: center;
+  gap: 1px; /* Espacio entre la casilla y el texto */
+  white-space: nowrap; /* Evita el salto de línea en el texto */
+
+}
+
+.servicios-vivienda-container,
+.servicios-comunitarios-container,
+.antecedentes-container,
+.servicios-salud-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 10px;
+}
+
+
+.servicio-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.servicio-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #F26512; 
+  cursor: pointer;
+}
+
+.servicio-item:hover {
+  background-color: #FFEEC8; /* Color de fondo más claro al pasar el mouse */
+  border-radius: 5px;
+}
+
+.servicio-item input[type="checkbox"]:checked + label {
+  color: #F26512; /* Cambia el color del texto cuando el checkbox está seleccionado */
+}
+
+.file-upload-container {
+  margin-top: 20px;
+}
+
+.file-upload-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.file-upload-container input[type="file"] {
+  margin-top: 5px;
+}
+
+.descripcion-textarea {
+  width: 100%;
+  height: 100px;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #F26512; /* Ajusta el color según tus necesidades */
+  border-radius: 4px;
+  resize: none; /* Evita que se pueda cambiar el tamaño */
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between; /* Alinea los botones a los extremos */
+  width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+  margin-top: 20px;
+}
+
+.button-group button {
+  background-color: #f26512;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  flex: 0 0 auto; /* Esto asegura que los botones no se expandan pero se mantengan del tamaño adecuado */
+}
+
+.button-group button:first-child {
+  margin-right: 20px; /* Espacio entre el primer botón y el segundo */
+}
+
+.button-group button:last-child {
+  margin-left: 20px; /* Espacio entre el segundo botón y el borde derecho */
+}
+
+/* Contenedor de la caja de error */
+.error-box {
+  background-color: #ffe4e6;
+  color: #d32f2f;
+  border: 1px solid #d32f2f;
+  padding: 10px 15px;
+  margin: 10px 0;
+  border-radius: 5px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: fadeIn 0.3s ease-in-out, fadeOut 0.5s ease-out 4.5s forwards;
+}
+
+.error-icon {
+  font-size: 18px;
+}
+
+.error-text {
+  margin: 0;
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
   }
-  
-  .registro-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+}
+
+/* Animación de desvanecimiento */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
   }
-  
-  .fundacion-logo {
-    width: 100px;
+  to {
+    opacity: 0;
   }
-  
-  .slogan {
-    font-size: 25px;
-    font-family: Kite One;
-    color: #f26512;
-    height: 65px;
+}
+
+
+/* Fondo semitransparente */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+/* Caja de mensaje de éxito */
+.success-modal {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  animation: slideUp 0.5s ease-out;
+}
+
+/* Animación de desvanecimiento */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  .progress-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+  to {
+    opacity: 1;
   }
-  
-  .progress-circle {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 2px solid black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 5px;
-    background-color: #FFF5E0; /* Color de fondo de los círculos */
-    color: black;
+}
+
+/* Animación de deslizamiento hacia arriba */
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
   }
-  
-  .progress-circle.completed {
-    background-color: #f26512; /* Color de los círculos completados */
-    color: white;
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
-  
-  .progress-circle.active {
-    border-color: #f26512; /* Color de borde para el círculo activo */
-  }
-  
-  .form-section {
-    margin-bottom: 20px;
-    flex: 1; 
-  }
-  
-  input,
-  select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #FFEEC8;
-  }
-  
-  .button-container {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  button {
-    background-color: #f26512;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #d04d10;
-  }
-  
-  
-  .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 1px; /* Espacio entre el input y la sección de no aplica */
-  }
-  
-  .contact-item input[type="text"] {
-    flex: 5; /* El input ocupará 4 partes del espacio */
-  }
-  
-  .contact-item label {
-    display: flex;
-    align-items: center;
-    gap: 1px; /* Espacio entre la casilla y el texto */
-    white-space: nowrap; /* Evita el salto de línea en el texto */
-  
-  }
-  
-    
-   
-  
-  .servicios-vivienda-container,
-  .servicios-comunitarios-container,
-  .antecedentes-container,
-  .servicios-salud-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-top: 10px;
-  }
-  
-  
-  .servicio-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .servicio-item input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    accent-color: #F26512; /* Color naranja de la marca */
-    cursor: pointer;
-  }
-  
-  .servicio-item:hover {
-    background-color: #FFEEC8; /* Color de fondo más claro al pasar el mouse */
-    border-radius: 5px;
-  }
-  
-  .servicio-item input[type="checkbox"]:checked + label {
-    color: #F26512; /* Cambia el color del texto cuando el checkbox está seleccionado */
-  }
-  
-  .file-upload-container {
-    margin-top: 20px;
-  }
-  
-  .file-upload-container label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .file-upload-container input[type="file"] {
-    margin-top: 5px;
-  }
-  
-  .descripcion-textarea {
-    width: 100%;
-    height: 100px;
-    margin-top: 10px;
-    padding: 10px;
-    border: 1px solid #F26512; /* Ajusta el color según tus necesidades */
-    border-radius: 4px;
-    resize: none; /* Evita que se pueda cambiar el tamaño */
-  }
-  
-  .button-group {
-    display: flex;
-    justify-content: space-between; /* Distribuye los botones uno a la izquierda y otro a la derecha */
-    margin-top: 20px;
-  }
-  
-  .button-group button {
-    flex: 1; /* Permite que ambos botones ocupen el mismo espacio */
-    margin: 0 10px; /* Agrega margen horizontal para separarlos */
-  }
-  
+}
+
+/* Botón de aceptar */
+.success-modal button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.success-modal button:hover {
+  background-color: #45a049;
+}
+.summary-message {
+  background-color: #fff4e5; /* Un suave color de fondo (naranja claro) */
+  border: 1px solid #ffa726; /* Un borde naranja que contraste */
+  border-radius: 8px; /* Bordes redondeados para suavizar */
+  padding: 15px; /* Espaciado interno para que no se vea apretado */
+  margin: 20px 0; /* Espaciado externo para separarlo de otros elementos */
+  font-size: 16px; /* Tamaño de letra legible */
+  color: #333; /* Texto oscuro para buena visibilidad */
+  font-family: 'Arial', sans-serif; /* Fuente limpia y profesional */
+  text-align: center; /* Centra el texto */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para dar efecto de profundidad */
+}
+
+.summary-message p {
+  margin: 0; /* Elimina márgenes internos del párrafo */
+  font-weight: bold; /* Destaca el texto */
+}

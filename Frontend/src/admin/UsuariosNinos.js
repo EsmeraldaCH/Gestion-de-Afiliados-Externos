@@ -4,7 +4,10 @@ import './UsuariosNinos.css'
 
 function UsuariosNinos() {
   const [usuarios, setUsuarios] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchInput, setSearchInput] = React.useState(""); // Lo que el usuario escribe
+  const [searchQuery, setSearchQuery] = React.useState(""); // Búsqueda activada
+  const [selectedState, setSelectedState] = React.useState("");
+
   const navigate = useNavigate(); // Hook para redireccionar
 
   useEffect(() => {
@@ -20,23 +23,44 @@ function UsuariosNinos() {
       .catch((error) => console.error('Error:', error));
   }, []);
 
-   // Función para manejar la búsqueda
-   const handleSearch = () => {
-    if (searchQuery.trim() === "") {
-      alert("Por favor ingresa algo en la barra de búsqueda.");
-    }
-  };
+// Función que activa la búsqueda al hacer clic en el botón
+const handleSearch = () => {
+  setSearchQuery(searchInput); // Actualiza el término final para la búsqueda
+  console.log("Realizando búsqueda para:", searchInput);
+  // Aquí puedes llamar a tu función para buscar usuarios en la base de datos
+};
 
-  // Filtrar y limitar los usuarios
-  const filteredUsuarios = usuarios
-    .filter((usuario) =>
-      usuario.nombre.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      usuario.apellido_paterno.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      usuario.apellido_materno.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      usuario.fecha_nacimiento.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-    .slice(-10) // Limitar a 10 registros
-    .reverse();
+// Función que limpia el input y el término de búsqueda
+const handleClearSearch = () => {
+  setSearchInput(""); // Limpia el texto en el input
+  setSearchQuery(""); // Limpia el término de búsqueda
+  setSelectedState(""); // Limpia la selección del estado
+  console.log("Búsqueda limpiada");
+};
+
+
+// Filtrar y limitar los usuarios
+const filteredUsuarios = usuarios
+  .filter((usuario) => {
+    const lowerSearchQuery = searchQuery.toLowerCase();
+    const searchTerms = lowerSearchQuery.split(' ').filter(term => term !== ''); // Divide el término de búsqueda por espacios
+
+    // Verificar si todos los términos de búsqueda están presentes en los campos correspondientes
+    const matchesSearchTerms = searchTerms.every((term) =>
+      usuario.nombre.toLowerCase().includes(term) ||
+      usuario.apellido_paterno.toLowerCase().includes(term) ||
+      usuario.apellido_materno.toLowerCase().includes(term) ||
+      usuario.fecha_nacimiento.toLowerCase().includes(term)
+    );
+
+    // Filtrar también por estado solo si la búsqueda se ha activado
+    const matchesState = selectedState ? usuario.estado === selectedState : true;
+
+    return matchesSearchTerms && matchesState; // Ambos deben coincidir
+  })
+  .slice(-10) // Limitar a 10 registros
+  .reverse(); // Ordenar los resultados
+
 
   // Función para construir la URL de la imagen
   const getImageUrl = (imagePath) => {
@@ -55,45 +79,103 @@ function UsuariosNinos() {
   };
 
   return (
-    <div className="body-container admin-container body-admin">
+  < div className="body-beneficiary">
       {/* Header */}
-      <header className="admin-header">
-        <nav className="admin-nav">
-          <ul className="admin-nav-list">
-            <div className="header">
-              <img src="/logo.png" alt="Fundación" className="fundacion-logo" />
-            </div>
-            <li className="admin-nav-item"><a href="#"><u>Inicio</u></a></li>
-            <li className="admin-nav-item"><a href="#"><u>Sobre Nosotros</u></a></li>
-            <li className="admin-nav-item"><a href="#"><u>Servicios</u></a></li>
-            <li className="admin-nav-item"><a href="#"><u>Contacto</u></a></li>
-          </ul>
-        </nav>
+      <header className="beneficiary-header">
+        <div className="header-content">
+          <img src="/logo.png" alt="Fundación" className="fundacion-logo" />
+          
+          {/* Contenedor para los enlaces de navegación */}
+          <nav className="beneficiary-nav">
+            <ul className="beneficiary-nav-list">
+              <li className="beneficiary-nav-item"><a href="/"><u>Inicio</u></a></li>
+              <li className="beneficiary-nav-item"><a href="#"><u>Sobre Nosotros</u></a></li>
+              <li className="beneficiary-nav-item"><a href="#"><u>Servicios</u></a></li>
+              <li className="beneficiary-nav-item"><a href="#"><u>Contacto</u></a></li>
+            </ul>
+          </nav>
+
+          <img src="/dar.png" alt="Fundación Dar" className="header-logo-right" />
+        </div>
       </header>
 
-      {/* Barra de búsqueda */}
-      <section className="welcome-section">
-        <div className="user-info">
-          <img className="admin-icon" src="/ADMING.png" alt="Icono de Admin" />
-          <div className="search-bar">
-            <input 
-              type="text" 
-              id="search-input" 
-              className="search-input" 
-              placeholder="Buscar por nombre o apellido o fecha de nacimiento..." 
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)} 
-            />
-            <button 
-              id="search-button" 
-              className="search-button" 
-              onClick={handleSearch}
-            >
-              <img src="/Buscar.png" alt="Buscar" height="20px" /> Buscar...
-            </button>
-          </div>
-        </div>
-      </section>
+
+{/* Barra de búsqueda con filtros */}
+<section className="admin-busqueda-section">
+  <div className="admin-busqueda-container">
+    <img className="admin-busqueda-icon" src="/ADMING.png" alt="Icono de Admin" />
+    <div className="admin-busqueda-title">Búsqueda de Usuarios</div>
+    <input 
+      type="busqueda"  // Asegúrate de que sea "text", no "busqueda"
+      id="admin-busqueda-input" 
+      className="admin-busqueda-input"
+      placeholder="Por Nombre,  Apellidos o Fecha de Nacimiento" 
+      value={searchInput} // Cambia al estado de entrada
+      onChange={(e) => setSearchInput(e.target.value)} 
+    />
+    <button 
+      className="admin-busqueda-button"
+      onClick={handleSearch} // Activa la búsqueda
+    >
+      <img src="/Buscar.png" alt="Buscar" className="admin-busqueda-button-icon" />
+      Buscar
+    </button>
+  </div>
+
+  {/* Filtro por estado */}
+  <div className="admin-filter-container">
+    <label htmlFor="admin-filter-select" className="admin-filter-label">Filtrar por estado:</label>
+    <select 
+      id="admin-filter-select" 
+      className="admin-filter-select" 
+      value={selectedState}
+      onChange={(e) => setSelectedState(e.target.value)} // Solo actualiza el estado seleccionado
+    >
+      <option value="">Todos</option>
+        <option value="Aguascalientes">Aguascalientes</option>
+        <option value="Baja California">Baja California</option>
+        <option value="Baja California Sur">Baja California Sur</option>
+        <option value="Campeche">Campeche</option>
+        <option value="Chiapas">Chiapas</option>
+        <option value="Chihuahua">Chihuahua</option>
+        <option value="Ciudad de México">Ciudad de México</option>
+        <option value="Coahuila">Coahuila</option>
+        <option value="Colima">Colima</option>
+        <option value="Durango">Durango</option>
+        <option value="Estado de México">Estado de México</option>
+        <option value="Guanajuato">Guanajuato</option>
+        <option value="Guerrero">Guerrero</option>
+        <option value="Hidalgo">Hidalgo</option>
+        <option value="Jalisco">Jalisco</option>
+        <option value="Michoacán">Michoacán</option>
+        <option value="Morelos">Morelos</option>
+        <option value="Nayarit">Nayarit</option>
+        <option value="Nuevo León">Nuevo León</option>
+        <option value="Oaxaca">Oaxaca</option>
+        <option value="Puebla">Puebla</option>
+        <option value="Querétaro">Querétaro</option>
+        <option value="Quintana Roo">Quintana Roo</option>
+        <option value="San Luis Potosí">San Luis Potosí</option>
+        <option value="Sinaloa">Sinaloa</option>
+        <option value="Sonora">Sonora</option>
+        <option value="Tabasco">Tabasco</option>
+        <option value="Tamaulipas">Tamaulipas</option>
+        <option value="Tlaxcala">Tlaxcala</option>
+        <option value="Veracruz">Veracruz</option>
+        <option value="Yucatán">Yucatán</option>
+        <option value="Zacatecas">Zacatecas</option>
+    </select>
+  </div>
+  <button 
+      className="admin-limpiar-button"
+      onClick={handleClearSearch} // Limpia la búsqueda
+    >
+      <img src="/limpiar.png" alt="Buscar" className="admin-busqueda-button-icon" />
+      Limpiar Búsqueda
+    </button>
+</section>
+
+
 
       {/* Usuarios - Niños */}
       <div className="container">
@@ -105,7 +187,7 @@ function UsuariosNinos() {
           <table className="data-table">
             <thead>
               <tr>
-                <th>Foto de Perfil</th>
+
                 <th>Nombre</th>
                 <th>Apellido Paterno</th>
                 <th>Apellido Materno</th>
@@ -120,11 +202,7 @@ function UsuariosNinos() {
             <tbody>
               {filteredUsuarios.map((usuario) => (
                 <tr key={usuario.beneficiario_id}>
-                   <td>
-                    {usuario.foto_perfil && (
-                      <img src={getImageUrl(usuario.foto_perfil)} alt={`Perfil de ${usuario.nombre}`} className="profile-photo" />
-                    )}
-                  </td>
+                   
                   <td>{usuario.nombre}</td>
                   <td>{usuario.apellido_paterno}</td>
                   <td>{usuario.apellido_materno}</td>
@@ -140,200 +218,6 @@ function UsuariosNinos() {
               ))}
             </tbody>
           </table>
-        </div>
-
-        {/* Datos de Contacto y Dirección */}
-        <div className="section">
-          <h3 className="subsection-title">Datos de Contacto y Dirección</h3>
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Domicilio (Calle y Número)</th>
-                <th>Colonia</th>
-                <th>Municipio</th>
-                <th>Estado</th>
-                <th>Código Postal</th>
-                <th>Referencia</th>
-                <th>Teléfono Fijo</th>
-                <th>Teléfono Fijo Extra</th>
-                <th>Teléfono Móvil</th>
-                <th>Teléfono Móvil Extra</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredUsuarios.map((usuario) => (
-                <tr key={usuario.beneficiario_id}>
-                  <td>{usuario.domicilio_calle_numero}</td>
-                  <td>{usuario.colonia}</td>
-                  <td>{usuario.municipio}</td>
-                  <td>{usuario.estado}</td>
-                  <td>{usuario.codigo_postal}</td>
-                  <td>{usuario.referencia}</td>
-                  <td>{usuario.telefono_fijo}</td>
-                  <td>{usuario.telefono_fijo_extra}</td>
-                  <td>{usuario.telefono_movil}</td>
-                  <td>{usuario.telefono_movil_extra}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Servicios de Vivienda y Servicios Comunitarios */}
-        <div className="section">
-          <h3 className="subsection-title">Servicios de Vivienda y Servicios Comunitarios</h3>
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Servicios de Vivienda</th>
-                <th>Servicios Comunitarios</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredUsuarios.map((usuario) => (
-                <tr key={usuario.beneficiario_id}>
-                  <td>{usuario.servicios_vivienda}</td>
-                  <td>{usuario.servicios_comunitarios}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Información Médica del Niño */}
-        <div className="section">
-          <h3 className="subsection-title">Información Médica del Niño</h3>
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Antecedentes Patológicos</th>
-                <th>Servicios de Salud</th>
-                <th>Informe Médico</th>
-                <th>Historial Médico</th>
-                <th>Certificados de Tratamientos Paliativos</th>
-                <th>Descripción de Apoyo</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredUsuarios.map((usuario) => (
-                <tr key={usuario.beneficiario_id}>
-                  <td>{usuario.antecedentes_patologicos}</td>
-                  <td>{usuario.servicios_salud}</td>
-                  <td>
-                    {usuario.informe_medico && (
-                      <a href={getDocumentUrl(usuario.informe_medico)} target="_blank" rel="noopener noreferrer" className="link">
-                        Ver Informe Médico
-                      </a>
-                    )}
-                  </td>
-                  <td>
-                    {usuario.historial_medico && (
-                      <a href={getDocumentUrl(usuario.historial_medico)} target="_blank" rel="noopener noreferrer" className="link">
-                        Ver Historial Médico
-                      </a>
-                    )}
-                  </td>
-                  <td>
-                    {usuario.certificados_tratamientos_paliativos && (
-                      <a href={getDocumentUrl(usuario.certificados_tratamientos_paliativos)} target="_blank" rel="noopener noreferrer" className="link">
-                        Ver Certificado de Tratamientos Paliativos
-                      </a>
-                    )}
-                  </td>
-                  <td>{usuario.descripcion_apoyo}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Documentos del Niño y Tutor */}
-        <div className="section">
-          <h3 className="subsection-title">Documentos del Niño y Tutor</h3>
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>Comprobante de Domicilio</th>
-                <th>CURP Documento</th>
-                <th>Documento de Identidad</th>
-                <th>Declaración de Impuestos</th>
-                <th>Comprobante de Ingresos</th>
-                <th>Carta de Antecedentes No Penales</th>
-                <th>Referencias Personales y Profesionales</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredUsuarios.map((usuario) => (
-                <tr key={usuario.beneficiario_id}>
-                  <td>
-                    {usuario.comprobante_domicilio && (
-                      <a href={getDocumentUrl(usuario.comprobante_domicilio)} target="_blank" rel="noopener noreferrer" className="link">
-                        Ver Comprobante de Domicilio
-                      </a>
-                    )}
-                  </td>
-                  <td>
-                    {usuario.curp_documento && (
-                      <a href={getDocumentUrl(usuario.curp_documento)} target="_blank" rel="noopener noreferrer" className="link">
-                        Ver Documento CURP
-                      </a>
-                    )}
-                  </td>
-                  <td>
-                    {usuario.documento_identidad && (
-                      <a href={getDocumentUrl(usuario.documento_identidad)} target="_blank" rel="noopener noreferrer" className="link">
-                        Ver Documento de Identidad
-                      </a>
-                    )}
-                  </td>
-                  <td>
-                    {usuario.declaracion_impuestos && (
-                      <a href={getDocumentUrl(usuario.declaracion_impuestos)} target="_blank" rel="noopener noreferrer" className="link">
-                        Ver Declaración de Impuestos
-                      </a>
-                    )}
-                  </td>
-                  <td>
-                    {usuario.comprobante_ingresos && (
-                      <a href={getDocumentUrl(usuario.comprobante_ingresos)} target="_blank" rel="noopener noreferrer" className="link">
-                        Ver Comprobante de Ingresos
-                      </a>
-                    )}
-                  </td>
-                  <td>
-                    {usuario.carta_antecedentes_no_penales && (
-                      <a href={getDocumentUrl(usuario.carta_antecedentes_no_penales)} target="_blank" rel="noopener noreferrer" className="link">
-                        Ver Carta de Antecedentes no Penales
-                      </a>
-                    )}
-                  </td>
-                  <td>
-                    {usuario.referencias_personales_profesionales && (
-                      <a href={getDocumentUrl(usuario.referencias_personales_profesionales)} target="_blank" rel="noopener noreferrer" className="link">
-                        Ver Referencias
-                      </a>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-         {/* Botones de Editar y Eliminar */}
-              <div className="action-buttons-container">
-                <button 
-                  className="action-button edit-button" 
-                  onClick={() => handleEdit(usuario.beneficiario_id)}
-                 >
-                      Editar Usuario
-               </button>
-               <button 
-                  className="action-button delete-button" 
-                  onClick={() => handleDelete(usuario.beneficiario_id)}
-               >
-                      Eliminar Usuario
-               </button>
-              </div>        
-              
         </div>
       </div>
 
@@ -370,4 +254,3 @@ function UsuariosNinos() {
 }
 
 export default UsuariosNinos;
-

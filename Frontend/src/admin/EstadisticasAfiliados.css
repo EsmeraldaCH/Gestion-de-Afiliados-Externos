@@ -1,0 +1,165 @@
+.container {
+  background: linear-gradient(135deg, rgba(255, 246, 235, 0.95), rgba(255, 238, 200, 0.95));
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 20px;
+  max-width: 1400px;
+  margin: 2rem auto;
+  box-shadow: 0 8px 32px rgba(242, 101, 18, 0.1);
+}
+
+/* Título principal en negro */
+.container h1 {
+  color: #fd6a45;  
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 800;
+  font-size: 2.5rem;
+}
+
+/* Eliminar línea del título principal */
+.container h1::after {
+  display: none;
+}
+
+.chart-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+}
+
+/* Ajustar color y quitar línea de los títulos de sección */
+.chart-title {
+  color: #464545;  /* Un negro más suave */
+  font-size: 1.8rem;
+  margin: 2rem 0;
+  text-align: center;
+  grid-column: 1 / -1;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.chart-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(135deg, #F26512, #FF8C42);
+  border-radius: 2px;
+}
+
+.chart {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(242, 101, 18, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.chart::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #F26512, #FF8C42);
+}
+
+.chart:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px #0f0f0f;
+}
+
+/* Eliminar línea de los títulos de sección */
+.chart-title::after {
+  display: none;
+}
+
+/* Subtítulos de las gráficas con línea que abarca todo el texto */
+.chart h3 {
+  color: #444;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+/* Ajustar la línea de los subtítulos para que abarque todo el texto */
+.chart h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;          /* Cambiado para que empiece desde el inicio */
+  width: 100%;      /* Cambiado para que abarque todo el ancho */
+  height: 2px;
+  background: #F26512;
+  border-radius: 1px;
+  transform: none;  /* Eliminar la transformación anterior */
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .container h1 {
+    font-size: 2rem;
+  }
+
+  .chart-title {
+    font-size: 1.5rem;
+  }
+
+  .chart {
+    padding: 1rem;
+  }
+  
+  .chart-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chart {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.chart:nth-child(2) { animation-delay: 0.2s; }
+.chart:nth-child(3) { animation-delay: 0.3s; }
+
+.chart-summary {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center;
+  margin-bottom: 10px; /* Espaciado entre el contador y la gráfica */
+  font-size: 16px;
+  font-weight: bold;
+  color: #333; /* Cambia el color según el diseño */
+}
+
+.total-count {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 5px 10px;
+}
