@@ -17,6 +17,14 @@
     margin-bottom: 20px;
     text-align: center;
   }
+  .section-subtitle {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000858;
+    margin-bottom: 40px;
+    margin-top: -40px;
+    text-align: right;
+  }
   
   .subsection-title {
     font-size: 20px;
@@ -62,10 +70,12 @@
   }
   
   .profile-photo {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 50%;
+    width: 100px; /* Tamaño fijo deseado */
+    height: 100px; /* Tamaño fijo deseado */
+    max-width: 300px;  /* Limita el tamaño máximo */
+    max-height: 300px; /* Limita el tamaño máximo */
+    object-fit: cover; /* Asegura que la imagen se recorte correctamente */
+    border-radius: 50%; /* Hace que la imagen sea redonda */
   }
   
   /* General */
@@ -258,41 +268,40 @@
   }
   
   
-/* Contenedor para los botones */
-.action-buttons-container {
-    display: flex;
-    justify-content: center;  /* Centra los botones horizontalmente */
-    gap: 20px;                /* Espacio entre los botones */
-    margin-top: 20px;         /* Margen superior para dar espacio al contenido previo */
-  }
-  
-  /* Estilo general para los botones */
-  .action-button {
-    padding: 12px 24px;       /* Aumentar el tamaño del botón */
-    font-size: 16px;          /* Tamaño de la fuente */
-    border-radius: 8px;       /* Bordes redondeados */
-    cursor: pointer;         /* Mostrar puntero al pasar el mouse */
-    transition: background-color 0.3s ease;  /* Transición suave */
-  }
-  
-  /* Botón de Editar */
-  .edit-button {
-    background-color: #4CAF50; /* Verde */
-    color: white;
-    border: none;
-  }
-  
-  .edit-button:hover {
-    background-color: #45a049; /* Un verde más oscuro al pasar el mouse */
-  }
-  
-  /* Botón de Eliminar */
-  .delete-button {
-    background-color: #df2c1f; /* Rojo */
-    color: white;
-    border: none;
-  }
-  
-  .delete-button:hover {
-    background-color: #d81f1c; /* Un rojo más oscuro al pasar el mouse */
-  }
+/* Estilo general para los botones (únicos) */
+.btn-unique {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+/* Botón de editar (único) */
+.btn-edit-profile {
+  background-color: #1e90ff; /* Azul */
+}
+
+.btn-edit-profile:hover {
+  background-color: #1c75d8; /* Azul más oscuro al pasar el mouse */
+}
+
+/* Botón de eliminar (único) */
+.btn-delete-profile {
+  background-color: #ff4c4c; /* Rojo */
+}
+
+.btn-delete-profile:hover {
+  background-color: #d93636; /* Rojo más oscuro al pasar el mouse */
+}
+
+/* Contenedor para los botones (único) */
+.action-buttons-container-unique {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 15px;
+}

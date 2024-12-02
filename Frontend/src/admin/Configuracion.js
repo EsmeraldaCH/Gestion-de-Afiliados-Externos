@@ -1,138 +1,259 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'; // Asegúrate de tener axios instalado
 import './stylesConfiguracion.css';
 
-const UserConfig = () => {
-  // Estado para los detalles del usuario
-  const [userDetails, setUserDetails] = useState({
-    nombre: 'Moisés', // Nombre por defecto
-    correo: 'hola@gmail.com', // Correo por defecto
-    contrasenaActual: '',
+const Configuracion = () => {
+  const [adminData, setAdminData] = useState({
+    id: null,
+    nombre: '',
+    correo: '',
+    curp: '',
     nuevaContrasena: '',
     confirmarContrasena: ''
   });
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Manejo de los cambios en los campos de entrada
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setUserDetails({ ...userDetails, [name]: value });
-  };
-
-  // Función de envío del formulario
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // Validar que las contraseñas coincidan
-    if (userDetails.nuevaContrasena !== userDetails.confirmarContrasena) {
-      alert('Las contraseñas no coinciden.');
+  useEffect(() => {
+    // Cargar datos del usuario desde localStorage
+    const userStr = localStorage.getItem('user');
+    
+    if (!userStr) {
+      setError('No se encontró información de usuario');
+      setLoading(false);
       return;
     }
 
-    // Si no se cambia la contraseña, no la enviamos
-    const dataToSubmit = {
-      nombre: userDetails.nombre,
-      correo: userDetails.correo,
-      ...(userDetails.contrasenaActual && {
-        contrasenaActual: userDetails.contrasenaActual,
-        nuevaContrasena: userDetails.nuevaContrasena
-      })
-    };
+    try {
+      const user = JSON.parse(userStr);
+      
+      if (!user.id) {
+        setError('No se encontró ID de administrador');
+        setLoading(false);
+        return;
+      }
+
+      // Fetch de los datos del administrador
+      const fetchAdminDetails = async () => {
+        try {
+          const response = await axios.get(`/api/administradores/${user.id}`);
+          setAdminData({
+            ...adminData,
+            id: user.id,
+            nombre: response.data.nombre || '',
+            correo: response.data.correo || '',
+            curp: response.data.curp || ''
+          });
+          setLoading(false);
+        } catch (error) {
+          setError('Error al cargar los datos del administrador');
+          setLoading(false);
+        }
+      };
+
+      fetchAdminDetails();
+    } catch (err) {
+      setError('Error al procesar la información de usuario');
+      setLoading(false);
+    }
+  }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setAdminData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+
+    // Validaciones
+    if (!adminData.nombre.trim()) {
+      setError('El nombre es obligatorio');
+      return;
+    }
+
+    // Validación de contraseña si se proporciona
+    if (adminData.nuevaContrasena) {
+      if (adminData.nuevaContrasena !== adminData.confirmarContrasena) {
+        setError('Las contraseñas no coinciden');
+        return;
+      }
+    }
 
     try {
-      const response = await fetch('/updateUser', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dataToSubmit)
-      });
+      // Preparar datos para enviar
+      const dataToSubmit = {
+        nombre: adminData.nombre.trim(),
+        correo: adminData.correo,
+        curp: adminData.curp,
+        nuevaContrasena: adminData.nuevaContrasena || undefined
+      };
 
-      const result = await response.json();
+      // Enviar actualización
+      const response = await axios.put(`/api/administradores/${adminData.id}`, dataToSubmit);
       
-      if (response.ok) {
-        alert('Cambios guardados correctamente');
-      } else {
-        alert(result.error || 'Error al guardar los cambios');
+      // Actualizar localStorage si es necesario
+      const userStr = localStorage.getItem('user');
+      if (userStr) {
+        const user = JSON.parse(userStr);
+        user.nombre = dataToSubmit.nombre;
+        localStorage.setItem('user', JSON.stringify(user));
       }
+
+      alert('Datos actualizados correctamente');
+      
+      // Limpiar contraseñas después de actualizar
+      setAdminData(prev => ({
+        ...prev,
+        nuevaContrasena: '',
+        confirmarContrasena: ''
+      }));
+
     } catch (error) {
-      console.error('Error al actualizar los datos:', error);
-      alert('Hubo un problema al guardar los cambios');
+      setError(error.response?.data?.error || 'Error al actualizar los datos');
     }
   };
 
-  return (
-    <div className="user-config-container">
-      <header className="user-config-header">
-        <nav>
-          <ul className="user-config-nav">
-            <li><a href="index.html"><u>Inicio</u></a></li>
-            <li><a href="sobre-nosotros.html"><u>Sobre Nosotros</u></a></li>
-            <li><a href="servicios.html"><u>Servicios</u></a></li>
-            <li><a href="contacto.html"><u>Contacto</u></a></li>
-          </ul>
-        </nav>
-      </header>
+  if (loading) {
+    return <div>Cargando...</div>;
+  }
 
+  return (
+    <div className="admin-config-container">
+
+      {/* Header */}
+      <header className="beneficiary-header">
+        <div className="header-content">
+          <img src="../logo.png" alt="Fundación" className="fundacion-logo" />
+          
+          {/* Contenedor para los enlaces de navegación */}
+          <nav className="beneficiary-nav">
+            <ul className="beneficiary-nav-list">
+              <li className="beneficiary-nav-item"><a href="/"><u>Inicio</u></a></li>
+              <li className="beneficiary-nav-item"><a href="#"><u>Sobre Nosotros</u></a></li>
+              <li className="beneficiary-nav-item"><a href="#"><u>Servicios</u></a></li>
+              <li className="beneficiary-nav-item"><a href="#"><u>Contacto</u></a></li>
+            </ul>
+          </nav>
+
+          <img src="../dar.png" alt="Fundación Dar" className="header-logo-right" />
+        </div>
+      </header>
       <section className="config-section body-configuracion">
-        <h1>Configuración de Usuario</h1>
-        <form id="userConfigForm" onSubmit={handleSubmit}>
+        <h1>Actualizar información del Administrador</h1>
+        {error && <div className="error-message">{error}</div>}
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="username">Nombre de usuario</label>
+            <label htmlFor="nombre">Nombre</label>
             <input
               type="text"
-              id="username"
+              id="nombre"
               name="nombre"
-              value={userDetails.nombre}
+              value={adminData.nombre}
               onChange={handleInputChange}
+              required
             />
           </div>
           <div className="form-group">
-            <label htmlFor="email">Correo Electrónico</label>
+            <label htmlFor="correo">Correo Electrónico</label>
             <input
               type="email"
-              id="email"
+              id="correo"
               name="correo"
-              value={userDetails.correo}
+              value={adminData.correo}
               onChange={handleInputChange}
+              required
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Contraseña Actual</label>
+            <label htmlFor="curp">CURP</label>
             <input
-              type="password"
-              id="password"
-              name="contrasenaActual"
-              placeholder="Ingrese contraseña actual"
-              value={userDetails.contrasenaActual}
+              type="text"
+              id="curp"
+              name="curp"
+              value={adminData.curp}
               onChange={handleInputChange}
+              required
             />
           </div>
           <div className="form-group">
-            <label htmlFor="newPassword">Nueva Contraseña</label>
+            <label htmlFor="nuevaContrasena">Nueva Contraseña</label>
             <input
               type="password"
-              id="newPassword"
+              id="nuevaContrasena"
               name="nuevaContrasena"
-              placeholder="Ingrese nueva contraseña"
-              value={userDetails.nuevaContrasena}
+              value={adminData.nuevaContrasena}
               onChange={handleInputChange}
+              placeholder="Dejar en blanco si no desea cambiar"
             />
           </div>
           <div className="form-group">
-            <label htmlFor="confirmPassword">Confirmar Contraseña</label>
+            <label htmlFor="confirmarContrasena">Confirmar Nueva Contraseña</label>
             <input
               type="password"
-              id="confirmPassword"
+              id="confirmarContrasena"
               name="confirmarContrasena"
-              placeholder="Confirme la nueva contraseña"
-              value={userDetails.confirmarContrasena}
+              value={adminData.confirmarContrasena}
               onChange={handleInputChange}
+              placeholder="Confirme la nueva contraseña"
             />
           </div>
           <button type="submit" className="save-btn">Guardar Cambios</button>
         </form>
       </section>
+      <footer className="home-footer">
+        <div className="social-icons">
+        <a
+            href="https://www.facebook.com/profile.php?id=100070034597140&mibextid=LQQJ4d"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="icon" src="../facebook.png" alt="Facebook" />
+          </a>
+          <a
+            href="https://www.youtube.com/@fundacionaikoi7305"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="icon" src="../youtube.png" alt="YouTube" />
+          </a>
+          <a
+            href="https://www.instagram.com/fundacionaikoi/?hl=es-la"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="icon" src="../instagram.png" alt="Instagram" />
+          </a>
+          <a
+            href="https://www.tiktok.com/@aikoiac"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="icon" src="../tik-tok.png" alt="TikTok" />
+          </a>
+          <a
+            href="https://twitter.com/fundacionaikoi"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="icon" src="../twiter.png" alt="Twitter" />
+          </a>
+          <a href="mailto:fundacion.aikoi@gmail.com" target="_blank">
+            <img className="icon" src="../gmail.png" alt="Gmail" />
+          </a>
+          <a href="https://wa.me/525610152625" target="_blank">
+            <img className="icon" src="../whatsapp.png" alt="WhatsApp" />
+          </a>
+        </div>
+        Fundación Ai Koi - <a href="../privacidad">Aviso de Privacidad</a> - <a href="../terminos">Términos y Condiciones</a> 
+      </footer>
     </div>
+    
   );
 };
 
-export default UserConfig;
+export default Configuracion;

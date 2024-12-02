@@ -7,6 +7,10 @@ import Profile from './pages/Profile';
 import ProfileDiscapacidad from './pages/ProfileDiscapacidad';
 import ProfileAdultos from './pages/ProfileAdultos';
 import EditarPerfil from './pages/EditarPerfil';
+import EditarPerfilAdulto from './pages/EditarPerfilAdulto';
+import EditarPerfilDiscapacidad from './pages/EditarPerfilDiscapacidad';
+
+
 import EstadisticasAfiliados from './admin/EstadisticasAfiliados';
 
 // Importación de componentes
@@ -21,6 +25,7 @@ import RegistroDiscacidad from './components/RegistroDiscapacidad';
 import AdminDashboard from './admin/AdminDashboard'; // Añade esta importación
 import Usuarios from './admin/Usuarios';
 import AgregarEvento from './admin/AgregarEvento';
+
 import Configuracion from './admin/Configuracion';
 import AddAdmin from './admin/AddAdmin';
 
@@ -57,6 +62,8 @@ function App() {
           <Route path="/ProfileDiscapacidad/:usuarioId" element={<ProfileDiscapacidad />} />
           <Route path="/ProfileAdultos/:usuarioId" element={<ProfileAdultos />} />
           <Route path="/editar/:usuarioId" element={<EditarPerfil />} />
+          <Route path="/editarAdulto/:usuarioId" element={<EditarPerfilAdulto />} />
+          <Route path="/editarDiscapacidad/:usuarioId" element={<EditarPerfilDiscapacidad />} />
 
           <Route path="/perfil" element={<PerfilUsuario />} />
           <Route path="/seleccion-beneficiario" element={<SeleccionBeneficiario />} />
@@ -79,6 +86,16 @@ function App() {
               )
             } 
           />
+<Route 
+  path="/admin/configuracion/:adminId" 
+  element={
+    user ? (
+      <Configuracion adminId={user.id} /> // Asume que user.id existe
+    ) : (
+      <Navigate to="/" />
+    )
+  } 
+/>
 
           <Route path="/admin/Usuarios" element={<Usuarios />} />
           <Route path="/admin/AgregarEvento" element={<AgregarEvento />} />

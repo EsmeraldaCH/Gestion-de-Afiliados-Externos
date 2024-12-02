@@ -30,7 +30,7 @@
 }
 
 .fundacion-logo {
-  height: 100px; /* Ajusta el tamaño del logo */
+  height: 100%; /* Ajusta el tamaño del logo */
 }
 
 .header-logo-right {
@@ -91,7 +91,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 70vh;
   background-color: #FFF5E0;
   font-family: 'Arial', sans-serif;
   color: #333;

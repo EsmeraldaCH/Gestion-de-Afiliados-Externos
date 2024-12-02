@@ -25,10 +25,31 @@ function UsuarioPerfil() {
     navigate(`/editar/${id}`); // Redirigir a una página para editar el usuario
   };
 
-  const handleDelete = (id) => {
-    // Lógica para eliminar un usuario
-    console.log("Eliminar usuario con ID:", id);
-  };
+  // Ruta para eliminar un usuario por ID
+ const handleDelete = (id) => {
+  if (window.confirm('¿Estás seguro de que deseas eliminar tu cuenta?')) {
+      fetch(`http://localhost:5000/api/beneficiarios/${id}`, {
+          method: 'DELETE',
+      })
+          .then((response) => {
+              if (!response.ok) {
+                  throw new Error('Error al eliminar la cuenta');
+              }
+              return response.json();
+          })
+          .then((data) => {
+              alert(data.message);
+              // Redirigir a la página principal después de 3 segundos
+              setTimeout(() => {
+                  navigate('/');
+              }, 1500);
+          })
+          .catch((error) => {
+              console.error('Error:', error);
+              alert('Hubo un problema al eliminar la cuenta');
+          });
+  }
+};
 
   // Función para construir la URL de la imagen
   const getImageUrl = (imagePath) => {
@@ -60,18 +81,18 @@ function UsuarioPerfil() {
               <li className="beneficiary-nav-item"><a href="#"><u>Contacto</u></a></li>
             </ul>
           </nav>
-
           <img src="../dar.png" alt="Fundación Dar" className="header-logo-right" />
         </div>
       </header>
 
       {/* Información del usuario (perfil) */}
       <div className="container">
-        <h2 className="section-title">Bienvenido a su Perfil</h2>
-
+        
+        <h2 className="section-title">Bienvenido a su Perfil: {usuario.nombre}</h2>
+        <h2 className="section-subtitle">Niño (a)</h2>
         {/* Datos Personales del Niño */}
         <div className="section">
-          <h3 className="subsection-title">Datos Personales Niño (a)</h3>
+          <h3 className="subsection-title">Datos Personales </h3>
           <table className="data-table">
             <thead>
               <tr>
@@ -139,10 +160,12 @@ function UsuarioPerfil() {
 
         {/* Información Médica del Niño */}
         <div className="section">
-          <h3 className="subsection-title">Información Médica</h3>
+          <h3 className="subsection-title">Información General</h3>
           <table className="data-table">
             <thead>
               <tr>
+              <th>Servicios de Vivienda</th>
+              <th>Servicios Comunitarios</th>
                 <th>Antecedentes Patológicos</th>
                 <th>Servicios de Salud</th>
                 <th>Informe Médico</th>
@@ -153,6 +176,8 @@ function UsuarioPerfil() {
             </thead>
             <tbody>
               <tr>
+              <td>{usuario.servicios_vivienda}</td>
+              <td>{usuario.servicios_comunitarios}</td>
                 <td>{usuario.antecedentes_patologicos}</td>
                 <td>{usuario.servicios_salud}</td>
                 <td>
@@ -252,18 +277,16 @@ function UsuarioPerfil() {
             </tbody>
           </table>
         </div>
-
-        {/* Botones de Editar y Eliminar */}
-        <div className="action-buttons-container">
-          <button className="action-button edit-button" onClick={() => handleEdit(usuario.beneficiario_id)}>
-            Editar Perfil
-          </button>
-          <button className="action-button delete-button" onClick={() => handleDelete(usuario.beneficiario_id)}>
-            Eliminar Perfil
-          </button>
-        </div>
+{/* Botones de Editar y Eliminar */}
+<div className="action-buttons-container">
+  <button className="edit-button" onClick={() => handleEdit(usuario.beneficiario_id)}>
+    Editar Información 🔄
+  </button>
+  <button className="delete-button" onClick={() => handleDelete(usuario.beneficiario_id)}>
+    Eliminar Cuenta 🗑️ 
+  </button>
+</div>
       </div>
-
       {/* Footer */}
       <footer className="home-footer">
         <div className="social-icons">
@@ -294,5 +317,4 @@ function UsuarioPerfil() {
     </div>
   );
 }
-
 export default UsuarioPerfil;

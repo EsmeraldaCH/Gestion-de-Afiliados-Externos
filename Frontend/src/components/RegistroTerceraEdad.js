@@ -68,8 +68,6 @@ function RegistroTerceraEdad() {
     5: ["comprobanteDomicilio", "curpDocumento", "documentoIdentidad", "declaracionImpuestos", "comprobanteIngresos", "cartaAntecedentesNoPenales", "referenciasPersonalesProfesionales", "certificadosAcademicos", "diplomasTitulos", "fotoPerfil"]
     };
 
-//terceraedad@gmail.com Moy1010@
-
   // Validar campos del paso actual
   const validateStep = () => {
     const requiredFields = requiredFieldsByStep[activeStep];

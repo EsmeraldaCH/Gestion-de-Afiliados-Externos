@@ -36,6 +36,7 @@
     text-align: center; /* Centrado del título */
     margin: 0;
     font-size: 24px;
+    
 }
 
 /* Botón en la parte derecha */
@@ -48,18 +49,15 @@
     background-color: #F26512; /* Color de fondo del botón */
     color: white; /* Color del texto */
     padding: 10px 20px;
-    border: 3px solid black;
+    border: 2px solid black;
     border-radius: 20px;
     cursor: pointer;
+    font-size: 18px;
 }
 
 .back-button:hover {
-    background-color: #D2550C; /* Color de fondo al pasar el mouse */
+    background-color: #ff6207; /* Color de fondo al pasar el mouse */
 }
-
-
-
-
 
 .usuario-detalles-container {
     display: flex; /* Activamos flexbox */
@@ -95,8 +93,10 @@
 }
 /* Imagen de Perfil */
 .profile-photo {
-    width: 100%; /* La imagen ocupa el 100% del ancho del contenedor */
-    height: 100%; /* La imagen ocupa el 100% de la altura del contenedor */
+    width: 205px; /* Ajusta el tamaño de la imagen */
+    height: 207px;
+    border-radius: 50%;
+    margin-right: 20px;
 }
 
 
@@ -261,17 +261,18 @@ a:hover {
 }
 
 .delete-button {
-    padding: 15px 26px;
+    padding: 12px 15px;
     background-color: #d9534f;
     color: white;
-    font-size: 24px;
+    font-size: 18px;
     border: none;
     border-radius: 30px;
     cursor: pointer;
+    border: 2px solid black;
 }
 
 .delete-button:hover {
-    background-color: #c9302c;
+    background-color: #b83732;
 }
 
 .alert-overlay {

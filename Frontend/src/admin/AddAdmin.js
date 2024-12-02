@@ -117,15 +117,20 @@ function AddAdmin() {
 
   return (
     <div className="body-container admin-container">
-      <header className="admin-header">
-        <nav className="admin-nav">
-          <ul className="admin-nav-list">
-            <li className="admin-nav-item"><a href="#">Inicio</a></li>
-            <li className="admin-nav-item"><a href="#">Sobre Nosotros</a></li>
-            <li className="admin-nav-item"><a href="#">Servicios</a></li>
-            <li className="admin-nav-item"><a href="#">Contacto</a></li>
-          </ul>
-        </nav>
+       {/* Header */}
+       <header className="beneficiary-header">
+        <div className="header-content">
+          <img src="../logo.png" alt="Fundación" className="fundacion-logo" />
+          <nav className="beneficiary-nav">
+            <ul className="beneficiary-nav-list">
+              <li className="beneficiary-nav-item"><a href="/"><u>Inicio</u></a></li>
+              <li className="beneficiary-nav-item"><a href="#"><u>Sobre Nosotros</u></a></li>
+              <li className="beneficiary-nav-item"><a href="#"><u>Servicios</u></a></li>
+              <li className="beneficiary-nav-item"><a href="#"><u>Contacto</u></a></li>
+            </ul>
+          </nav>
+          <img src="../dar.png" alt="Fundación Dar" className="header-logo-right" />
+        </div>
       </header>
 
       <div className="admin-container-administrador">

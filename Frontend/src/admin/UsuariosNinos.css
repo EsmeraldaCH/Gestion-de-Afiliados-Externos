@@ -218,13 +218,18 @@
   
   /* Botón de Editar */
   .edit-button {
+    padding: 12px 15px;
     background-color: #4CAF50; /* Verde */
     color: white;
+    font-size: 18px;
     border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    border: 2px solid black;
   }
   
   .edit-button:hover {
-    background-color: #45a049; /* Un verde más oscuro al pasar el mouse */
+    background-color: #117416; /* Un verde más oscuro al pasar el mouse */
   }
   
   /* Botón de Eliminar */
